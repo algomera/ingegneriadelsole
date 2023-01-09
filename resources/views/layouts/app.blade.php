@@ -10,6 +10,15 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        <!-- QuillJS -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+        <!-- FlatPickr -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/it.min.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -37,8 +46,11 @@
             </main>
         </div>
 
+        <x-notification></x-notification>
         @stack('modals')
 
         @livewireScripts
+        @livewire('livewire-ui-modal')
+        @stack('scripts')
     </body>
 </html>
