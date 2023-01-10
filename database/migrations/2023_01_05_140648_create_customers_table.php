@@ -25,13 +25,13 @@
 					'private',
 					'company'
 				]);
-				$table->foreignIdFor(Referent::class, 'referent_id');
-				$table->string('pec');
-				$table->string('notification_email');
-				$table->string('vat_number');
-				$table->string('fiscal_code');
-				$table->foreignIdFor(Headquarter::class, 'headquarter_id');
-				$table->foreignIdFor(LegalRepresentative::class, 'legal_representative_id');
+				$table->foreignIdFor(Referent::class, 'referent_id')->nullable();
+				$table->string('pec')->nullable();
+				$table->string('notification_email')->nullable();
+				$table->string('vat_number')->nullable();
+				$table->string('fiscal_code')->nullable();
+				$table->foreignIdFor(Headquarter::class, 'headquarter_id')->nullable();
+				$table->foreignIdFor(LegalRepresentative::class, 'legal_representative_id')->nullable();
 				$table->text('note')->nullable();
 				$table->timestamps();
 			});

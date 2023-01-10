@@ -7,8 +7,9 @@ use Livewire\Component;
 
 class Show extends Component
 {
+	public Customer $customer;
 	public function mount(Customer $customer) {
-		dd($customer);
+		$this->customer = $customer;
 	}
     public function render()
     {
