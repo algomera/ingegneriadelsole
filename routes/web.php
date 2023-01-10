@@ -28,4 +28,12 @@
 			\App\Http\Livewire\Customers\Index::class,
 			'__invoke'
 		])->name('customers');
+		Route::get('/customers/create', [
+			\App\Http\Livewire\Customers\Create::class,
+			'__invoke'
+		])->name('customers.create');
+		Route::get('/customers/{customer}', [
+			\App\Http\Livewire\Customers\Show::class,
+			'__invoke'
+		])->name('customers.show');
 	});

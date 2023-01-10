@@ -9,6 +9,8 @@
 	{
 		use HasFactory;
 
+		protected $guarded = [];
+
 		public function customer() {
 			return $this->hasOne(Customer::class);
 		}

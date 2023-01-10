@@ -1,16 +1,15 @@
-<x-slot name="header">
-    <div class="flex items-center justify-between">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Anagrafiche
-        </h2>
-        <x-jet-button>Nuova</x-jet-button>
-    </div>
-</x-slot>
-
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="p-4 bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            Anagrafiche
-        </div>
-    </div>
-</div>
+<x-card>
+	<x-card-header>
+		<x-slot:title>Anagrafiche</x-slot:title>
+		<x-slot:actions>
+			<x-jet-button :href="route('customers.create')">
+				<x-heroicon-o-plus class="w-4 h-4"></x-heroicon-o-plus>
+			</x-jet-button>
+		</x-slot:actions>
+	</x-card-header>
+	<div class="p-4">
+		@foreach($customers as $customer)
+			<a href="{{ route('customers.show', $customer->id) }}" class="block">{{ $customer->name }}</a>
+		@endforeach
+	</div>
+</x-card>
