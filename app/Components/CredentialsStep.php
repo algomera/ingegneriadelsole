@@ -1,23 +1,37 @@
 <?php
 
 	namespace App\Components;
-	use App\Models\Customer;
+
+	use App\Models\Credential;
 	use Spatie\LivewireWizard\Components\StepComponent;
 
 	class CredentialsStep extends StepComponent
 	{
+
+		protected $listeners = [
+			'credential-added' => '$refresh',
+			'credential-deleted' => '$refresh',
+			'credential-updated' => '$refresh',
+		];
 		public function next() {
-//			$this->validate();
-//			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
 			$this->nextStep();
 		}
-		public function stepInfo(): array
-		{
+
+		public function deleteCredential($id) {
+			Credential::find($id)->delete();
+			$this->emit('credential-deleted');
+		}
+
+		public function stepInfo(): array {
 			return [
 				'label' => 'Credenziali',
 			];
 		}
+
 		public function render() {
-			return view('customer-wizard.steps.credentials');
+			$credentials = Credential::where('customer_id', $this->state()->forStep('general-informations-step')['customer_id'])->get();
+			return view('customer-wizard.steps.credentials', [
+				'credentials' => $credentials
+			]);
 		}
 	}

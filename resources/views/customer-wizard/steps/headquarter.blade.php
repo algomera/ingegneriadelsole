@@ -5,7 +5,7 @@
 		</div>
 		<div class="col-span-4 sm:col-span-3">
 			<div>
-				<h2 class="text-lg font-medium text-gray-900">Sede legale</h2>
+				<h2 class="sm:hidden text-lg font-medium text-gray-900">Sede legale</h2>
 				<div class="mt-4 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-6">
 					<div class="sm:col-span-2">
 						<x-jet-input wire:model.defer="headquarter_street" type="text"

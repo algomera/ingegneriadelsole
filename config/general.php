@@ -1,12 +1,20 @@
 <?php
 	return [
-		'customer' => [
+		'customer'    => [
 			'types' => [
 				'private' => 'Privato',
 				'company' => 'Azienda'
 			]
 		],
-		'system'   => [
+		'credentials' => [
+			'types' => [
+				'e-distribuzione' => 'E-distribuzione',
+				'terna'           => 'Terna',
+				'gse'             => 'GSE',
+				'altro'           => 'Altro'
+			]
+		],
+		'system'      => [
 			'connections' => [
 				'cessione_totale'   => 'Cessione Totale',
 				'cessione_parziale' => 'Cessione Parziale',
@@ -22,8 +30,8 @@
 				'altro'   => 'Altro',
 				'nessuno' => 'Nessuno'
 			],
-			'sales' => [
-				'gse' => 'GSE',
+			'sales'       => [
+				'gse'    => 'GSE',
 				'trader' => 'Trader'
 			]
 		]

@@ -16,11 +16,12 @@
 				$table->id();
 				$table->foreignIdFor(Customer::class, 'customer_id');
 				$table->enum('type', [
-					'E-distribuzione',
-					'Terna',
-					'GSE',
-					'Altro'
+					'e-distribuzione',
+					'terna',
+					'gse',
+					'altro'
 				]);
+				$table->string('service')->nullable();
 				$table->string('username');
 				$table->string('password');
 				$table->timestamps();
