@@ -10,13 +10,7 @@
 					<div class="flex items-start">
 						@if($step->isPrevious())
 							<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-								<svg class="h-full w-full text-indigo-600 group-hover:text-indigo-800"
-								     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-								     fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd"
-									      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-									      clip-rule="evenodd"/>
-								</svg>
+								<x-heroicon-o-check-circle class="h-full w-full text-indigo-600 group-hover:text-indigo-800"></x-heroicon-o-check-circle>
 							</span>
 						@endif
 						@if($step->isNext())
@@ -26,13 +20,19 @@
 							</div>
 						@endif
 						@if($step->isCurrent())
-							<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
-							      aria-hidden="true">
+							@if($errors->any())
+								<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
+									<x-heroicon-o-x-circle class="h-full w-full text-red-600 group-hover:text-red-800"></x-heroicon-o-x-circle>
+								</span>
+							@else
+								<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
+								      aria-hidden="true">
 								<span class="absolute h-4 w-4 rounded-full bg-indigo-200"></span>
 								<span class="relative block h-2 w-2 rounded-full bg-indigo-600"></span>
 							</span>
+							@endif
 						@endif
-						<p class="hidden sm:block ml-3 text-sm {{ $step->isCurrent() ? 'font-semibold text-indigo-500' : 'text-gray-500' }} {{ $step->isPrevious() ? 'group-hover:text-gray-900 cursor-pointer' : '' }}">{{ $step->label }}</p>
+						<p class="hidden sm:block ml-3 text-sm {{ $step->isCurrent() ? $errors->any() ? 'font-semibold text-red-500' : 'font-semibold text-indigo-500' : 'text-gray-500' }} {{ $step->isPrevious() ? 'group-hover:text-gray-900 cursor-pointer' : '' }}">{{ $step->label }}</p>
 					</div>
 				</div>
 			</li>
