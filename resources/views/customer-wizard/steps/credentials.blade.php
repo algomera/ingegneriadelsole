@@ -19,14 +19,13 @@
 								<div x-data="{show: false}">
 									<p class="text-sm font-medium text-gray-900">{{ $credential->service }}</p>
 									<p class="text-sm text-gray-500">Username: {{ $credential->username }}</p>
-									<p x-on:click="show = !show" class="text-sm text-gray-500">
+									<p class="text-sm text-gray-500">
 										Password:
-										<span x-show="!show">
-											@foreach(range(0, strlen($credential->password)) as $p)
-												•
-											@endforeach
-										</span>
-										<span x-show="show">{{ $credential->password }}</span>
+										<span x-on:click="show = true" x-show="!show" class="text-xs border px-1 rounded">vedi</span>
+										<span x-on:click="show = false" x-show="show" class="text-xs border px-1 rounded">nascondi</span>
+										<template x-if="show">
+											<span>{{ $credential->password }}</span>
+										</template>
 									</p>
 								</div>
 								<div class="flex items-center space-x-8">
