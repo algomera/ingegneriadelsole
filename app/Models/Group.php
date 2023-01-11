@@ -9,6 +9,8 @@ class Group extends Model
 {
     use HasFactory;
 
+	protected $guarded = [];
+
 	public function customers() {
 		return $this->hasMany(Customer::class);
 	}

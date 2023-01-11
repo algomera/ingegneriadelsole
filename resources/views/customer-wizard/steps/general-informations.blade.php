@@ -16,10 +16,13 @@
 							<x-jet-label for="group_id">
 								Gruppo di appartenenza
 							</x-jet-label>
-							<span class="text-xs text-indigo-500">Crea</span>
+							<span wire:click="$emit('openModal', 'customers.create-group')" class="text-xs text-indigo-500 cursor-pointer">Crea</span>
 						</div>
 						<x-select wire:model.defer="group_id" for="group_id" class="mt-1">
-							<option value="gruppo_1">Gruppo 1</option>
+							<option value="null" selected>Nessuno</option>
+							@foreach($groups as $group)
+								<option value="{{ $group->id }}">{{ $group->name }}</option>
+							@endforeach
 						</x-select>
 					</div>
 

@@ -5,13 +5,15 @@
 		</div>
 		<div class="col-span-4 sm:col-span-3">
 			<div>
-				<h2 class="sm:hidden text-lg font-medium text-gray-900">Credenziali</h2>
-				@if($credentials->count())
-					<x-jet-button
-							wire:click="$emit('openModal', 'customers.create-credential', {{ json_encode(['customer_id' => $this->state()->forStep('general-informations-step')['customer_id']]) }})">
-						Aggiungi
-					</x-jet-button>
-				@endif
+				<div class="flex items-center justify-between">
+					<h2 class="sm:hidden text-lg font-medium text-gray-900">Credenziali</h2>
+					@if($credentials->count())
+						<x-jet-button
+								wire:click="$emit('openModal', 'customers.create-credential', {{ json_encode(['customer_id' => $this->state()->forStep('general-informations-step')['customer_id']]) }})">
+							Aggiungi
+						</x-jet-button>
+					@endif
+				</div>
 				<div class="mt-4">
 					<ul role="list" class="divide-y divide-gray-200">
 						@forelse($credentials as $credential)
