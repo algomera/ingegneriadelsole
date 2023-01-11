@@ -15,18 +15,22 @@
 				<div class="mt-4">
 					<ul role="list" class="divide-y divide-gray-200">
 						@forelse($credentials as $credential)
-							<li class="flex items-center justify-between py-4">
+							<li class="flex items-start justify-between py-4">
 								<div x-data="{show: false}">
-									<p class="text-sm font-medium text-gray-900">{{ $credential->service }}</p>
-									<p class="text-sm text-gray-500">Username: {{ $credential->username }}</p>
-									<p class="text-sm text-gray-500">
-										Password:
-										<span x-on:click="show = true" x-show="!show" class="text-xs border px-1 rounded">vedi</span>
-										<span x-on:click="show = false" x-show="show" class="text-xs border px-1 rounded">nascondi</span>
-										<template x-if="show">
-											<span>{{ $credential->password }}</span>
-										</template>
-									</p>
+									<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $credential->service }}</p>
+									<p class="mb-0.5 text-sm text-gray-500">Username: <strong>{{ $credential->username }}</strong></p>
+									<div class="flex space-x-1 text-sm text-gray-500">
+										<span>Password:</span>
+										<div x-on:click="show = true" x-show="!show"
+										     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
+											<x-heroicon-o-eye class="w-3 h-3"></x-heroicon-o-eye>
+										</div>
+										<div x-on:click="show = false" x-show="show"
+										     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
+											<x-heroicon-o-eye-slash class="w-3 h-3"></x-heroicon-o-eye-slash>
+										</div>
+										<strong x-show="show">{{ $credential->password }}</strong>
+									</div>
 								</div>
 								<div class="flex items-center space-x-8">
 									<x-heroicon-o-trash wire:click="deleteCredential({{ $credential->id }})"
