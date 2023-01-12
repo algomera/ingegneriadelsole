@@ -50,7 +50,7 @@ class CustomerSeeder extends Seeder
 			'referent_id' => $referent->id,
 			'pec' => fake()->email,
 			'notification_email' => fake()->email,
-			'vat_number' => '00000000000',
+			'vat_number' => '0000000000000',
 			'fiscal_code' => 'SRMFBA90R12A465L',
 			'headquarter_id' => $headquarter->id,
 			'legal_representative_id' => $legal_representative->id

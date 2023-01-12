@@ -18,7 +18,7 @@
 		];
 
 		public function mount() {
-			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']) ?: Customer::latest()->first();
 		}
 
 		public function next() {
