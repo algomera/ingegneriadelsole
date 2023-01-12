@@ -3,10 +3,14 @@
 	namespace App\Components;
 
 	use App\Models\Customer;
+	use App\Traits\WizardQueryString;
+	use Livewire\Livewire;
 	use Spatie\LivewireWizard\Components\WizardComponent;
 
 	class CustomerWizard extends WizardComponent
 	{
+		use WizardQueryString;
+
 		public $customer;
 
 		public function mount(Customer $customer) {
@@ -62,6 +66,18 @@
 				LegalRepresentativesStep::class,
 				CredentialsStep::class,
 				NotesStep::class,
+			];
+		}
+
+		protected function queryStringSteps(): array {
+			return [
+				Livewire::getAlias(GeneralInformationsStep::class)  => 'general-informations',
+				Livewire::getAlias(ContactInformationsStep::class)  => 'contact-informations',
+				Livewire::getAlias(ReferentStep::class)             => 'referent',
+				Livewire::getAlias(HeadquarterStep::class)          => 'headquarter',
+				Livewire::getAlias(LegalRepresentativesStep::class) => 'legal-representative',
+				Livewire::getAlias(CredentialsStep::class)          => 'credentials',
+				Livewire::getAlias(NotesStep::class)                => 'notes',
 			];
 		}
 	}
