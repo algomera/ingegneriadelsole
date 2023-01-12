@@ -7,7 +7,7 @@
 
 	class ReferentStep extends StepComponent
 	{
-		public $referent_first_name, $referent_last_name, $referent_email, $referent_phone;
+		public $customer, $referent_first_name, $referent_last_name, $referent_email, $referent_phone;
 
 		protected $rules = [
 			'referent_first_name'              => 'required|string',
@@ -16,16 +16,19 @@
 			'referent_phone'                   => 'required',
 		];
 
+		public function mount() {
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+		}
+
 		public function next() {
 			$this->validate();
-			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
-			$referent = Referent::updateOrCreate(['id' => $customer->referent->id],[
+			$referent = Referent::updateOrCreate(['id' => $this->customer->referent->id],[
 				'first_name' => $this->referent_first_name,
 				'last_name'  => $this->referent_last_name,
 				'email'      => $this->referent_email,
 				'phone'      => $this->referent_phone
 			]);
-			$customer->update([
+			$this->customer->update([
 				'referent_id' => $referent->id
 			]);
 			$this->nextStep();

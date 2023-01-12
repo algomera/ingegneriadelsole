@@ -8,7 +8,7 @@
 
 	class LegalRepresentativesStep extends StepComponent
 	{
-		public $legal_representative_first_name, $legal_representative_last_name, $legal_representative_fiscal_code, $legal_representative_street, $legal_representative_city, $legal_representative_province;
+		public $customer, $legal_representative_first_name, $legal_representative_last_name, $legal_representative_fiscal_code, $legal_representative_street, $legal_representative_city, $legal_representative_province;
 		protected $rules = [
 			'legal_representative_first_name' => 'required|string',
 			'legal_representative_last_name'  => 'required|string',
@@ -17,10 +17,13 @@
 			'legal_representative_province'   => 'required|string',
 		];
 
+		public function mount() {
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+		}
+
 		public function next() {
 			$this->validate();
-			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
-			$legal_representative = LegalRepresentative::updateOrCreate(['id' => $customer->legal_representative->id], [
+			$legal_representative = LegalRepresentative::updateOrCreate(['id' => $this->customer->legal_representative->id], [
 				'first_name'  => $this->legal_representative_first_name,
 				'last_name'   => $this->legal_representative_last_name,
 				'fiscal_code' => $this->legal_representative_fiscal_code,
@@ -28,7 +31,7 @@
 				'city'        => $this->legal_representative_city,
 				'province'    => $this->legal_representative_province,
 			]);
-			$customer->update([
+			$this->customer->update([
 				'legal_representative_id' => $legal_representative->id
 			]);
 			$this->nextStep();

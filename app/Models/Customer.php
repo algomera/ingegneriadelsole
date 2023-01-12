@@ -11,6 +11,14 @@
 
 		protected $guarded = [];
 
+		public function setVatNumberAttribute($value) {
+			$this->attributes['vat_number'] = strtoupper($value);
+		}
+
+		public function setFiscalCodeAttribute($value) {
+			$this->attributes['fiscal_code'] = strtoupper($value);
+		}
+
 		public function group() {
 			return $this->belongsTo(Group::class);
 		}

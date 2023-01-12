@@ -7,7 +7,7 @@
 
 	class HeadquarterStep extends StepComponent
 	{
-		public $headquarter_street, $headquarter_city, $headquarter_province;
+		public $customer, $headquarter_street, $headquarter_city, $headquarter_province;
 
 		protected $rules = [
 			'headquarter_street'               => 'required|string',
@@ -15,15 +15,18 @@
 			'headquarter_province'             => 'required|string',
 		];
 
+		public function mount() {
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+		}
+
 		public function next() {
 			$this->validate();
-			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
-			$headquarter = Headquarter::updateOrCreate(['id' => $customer->headquarter->id],[
+			$headquarter = Headquarter::updateOrCreate(['id' => $this->customer->headquarter->id],[
 				'street'   => $this->headquarter_street,
 				'city'     => $this->headquarter_city,
 				'province' => $this->headquarter_province,
 			]);
-			$customer->update([
+			$this->customer->update([
 				'headquarter_id' => $headquarter->id
 			]);
 			$this->nextStep();

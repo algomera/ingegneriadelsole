@@ -6,16 +6,19 @@
 
 	class NotesStep extends StepComponent
 	{
-		public $note;
+		public $customer, $note;
 
 		protected $rules = [
 			'note' => 'nullable'
 		];
 
+		public function mount() {
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+		}
+
 		public function next() {
 			$this->validate();
-			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
-			$customer->update([
+			$this->customer->update([
 				'note' => $this->note
 			]);
 //			$this->nextStep();

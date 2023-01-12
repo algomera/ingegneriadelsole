@@ -1,4 +1,14 @@
-<div>
+<x-card>
+	<x-card-header>
+		<x-slot:title>{{ $customer->name }}</x-slot:title>
+		<x-slot:actions>
+			<x-jet-button wire:click="previousStep">
+				<x-heroicon-o-chevron-left class="w-4 h-4"></x-heroicon-o-chevron-left>
+			</x-jet-button>
+			<x-jet-button wire:click="next">Avanti</x-jet-button>
+		</x-slot:actions>
+	</x-card-header>
+	<div class="p-4">
 	<div class="grid grid-cols-4 gap-6">
 		<div class="col-span-4 sm:col-span-1">
 			<x-wizard-navigation :steps="$steps"/>
@@ -25,11 +35,7 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="mt-4 flex items-center justify-between">
-				<x-jet-button wire:click="previousStep">Indietro</x-jet-button>
-				<x-jet-button wire:click="next">Avanti</x-jet-button>
-			</div>
 		</div>
 	</div>
 </div>
+</x-card>

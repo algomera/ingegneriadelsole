@@ -7,7 +7,7 @@
 
 	class ContactInformationsStep extends StepComponent
 	{
-		public $pec, $notification_email, $vat_number, $fiscal_code;
+		public $customer, $pec, $notification_email, $vat_number, $fiscal_code;
 		protected $rules = [
 			'pec'                => 'required|email',
 			'notification_email' => 'required|email',
@@ -15,10 +15,13 @@
 			'fiscal_code'        => 'required|size:16',
 		];
 
+		public function mount() {
+			$this->customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
+		}
+
 		public function next() {
 			$this->validate();
-			$customer = Customer::find($this->state()->forStep('general-informations-step')['customer_id']);
-			$customer->update([
+			$this->customer->update([
 				'pec'                => $this->pec,
 				'notification_email' => $this->notification_email,
 				'vat_number'         => $this->vat_number,

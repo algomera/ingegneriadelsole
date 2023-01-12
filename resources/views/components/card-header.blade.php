@@ -6,7 +6,7 @@
 				@endisset
 			</div>
 		@isset($actions)
-			<div class="ml-4 mt-2 flex-shrink-0">
+			<div class="flex space-x-3 ml-4 mt-2 flex-shrink-0">
 				{{ $actions }}
 			</div>
 		@endisset

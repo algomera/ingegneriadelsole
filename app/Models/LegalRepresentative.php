@@ -11,6 +11,10 @@
 
 		protected $guarded = [];
 
+		public function setFiscalCodeAttribute($value) {
+			$this->attributes['fiscal_code'] = strtoupper($value);
+		}
+
 		public function customer() {
 			return $this->hasOne(Customer::class);
 		}
