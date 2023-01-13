@@ -21,14 +21,24 @@
 
 		public function next() {
 			$this->validate();
-			$headquarter = Headquarter::updateOrCreate(['id' => $this->customer->headquarter->id],[
-				'street'   => $this->headquarter_street,
-				'city'     => $this->headquarter_city,
-				'province' => $this->headquarter_province,
-			]);
-			$this->customer->update([
-				'headquarter_id' => $headquarter->id
-			]);
+			if($this->customer->headquarter) {
+				$this->customer->headquarter->update([
+					'street'   => $this->headquarter_street,
+					'city'     => $this->headquarter_city,
+					'province' => $this->headquarter_province,
+				]);
+			} else {
+				$headquarter = Headquarter::create([
+					'street'   => $this->headquarter_street,
+					'city'     => $this->headquarter_city,
+					'province' => $this->headquarter_province,
+				]);
+				$this->customer->update([
+					'headquarter_id' => $headquarter->id
+				]);
+			}
+
+
 			$this->nextStep();
 		}
 		public function stepInfo(): array

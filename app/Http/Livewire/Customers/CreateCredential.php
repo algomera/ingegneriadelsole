@@ -15,7 +15,7 @@
 		public $password;
 
 		public function mount($customer_id) {
-			$this->customer = Customer::find($customer_id);
+			$this->customer = Customer::find($customer_id) ?: Customer::latest()->first();
 		}
 
 		public function updatedType($value) {

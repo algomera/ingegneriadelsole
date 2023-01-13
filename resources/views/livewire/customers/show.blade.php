@@ -12,11 +12,13 @@
 		</x-card-header>
 		<div class="p-4">
 			<ul role="list" class="divide-y divide-gray-200">
-				@foreach($customer->systems as $system)
+				@forelse($customer->systems as $system)
 					<li class="py-4">
 						{{ $system->name }}
 					</li>
-				@endforeach
+					@empty
+					<p class="py-4 text-sm text-center text-gray-500">Nessun impianto inserito</p>
+				@endforelse
 			</ul>
 		</div>
 	</x-card>

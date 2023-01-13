@@ -21,8 +21,8 @@
 			$this->customer->update([
 				'note' => $this->note
 			]);
-//			$this->nextStep();
-			dd("ok");
+
+			return redirect()->route('customers.show', ['customer' => $this->customer]);
 		}
 		public function stepInfo(): array
 		{

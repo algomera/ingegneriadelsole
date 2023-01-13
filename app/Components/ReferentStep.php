@@ -22,15 +22,25 @@
 
 		public function next() {
 			$this->validate();
-			$referent = Referent::updateOrCreate(['id' => $this->customer->referent->id],[
-				'first_name' => $this->referent_first_name,
-				'last_name'  => $this->referent_last_name,
-				'email'      => $this->referent_email,
-				'phone'      => $this->referent_phone
-			]);
-			$this->customer->update([
-				'referent_id' => $referent->id
-			]);
+			if($this->customer->referent) {
+				$this->customer->referent->update([
+					'first_name' => $this->referent_first_name,
+					'last_name'  => $this->referent_last_name,
+					'email'      => $this->referent_email,
+					'phone'      => $this->referent_phone
+				]);
+			} else {
+				$referent = Referent::create([
+					'first_name' => $this->referent_first_name,
+					'last_name'  => $this->referent_last_name,
+					'email'      => $this->referent_email,
+					'phone'      => $this->referent_phone
+				]);
+				$this->customer->update([
+					'referent_id' => $referent->id
+				]);
+			}
+
 			$this->nextStep();
 		}
 
