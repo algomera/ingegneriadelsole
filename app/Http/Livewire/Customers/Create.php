@@ -32,29 +32,35 @@
 		public $legal_representatives_city = '';
 		public $legal_representatives_province = '';
 		public $note = '';
-		protected $rules = [
-			'name'                             => 'required|string',
-			'group_id'                         => 'nullable',
-			'agent'                            => 'boolean',
-			'type'                             => 'in:private,company',
-			'pec'                              => 'required|email',
-			'notification_email'               => 'required|email',
-			'vat_number'                       => 'required|size:13',
-			'fiscal_code'                      => 'required|size:16',
-			'referent_first_name'              => 'required|string',
-			'referent_last_name'               => 'required|string',
-			'referent_email'                   => 'required|email',
-			'referent_phone'                   => 'required',
-			'headquarter_street'               => 'required|string',
-			'headquarter_city'                 => 'required|string',
-			'headquarter_province'             => 'required|string',
-			'legal_representatives_first_name' => 'required|string',
-			'legal_representatives_last_name'  => 'required|string',
-			'legal_representatives_street'     => 'required|string',
-			'legal_representatives_city'       => 'required|string',
-			'legal_representatives_province'   => 'required|string',
-			'note' => 'nullable'
-		];
+
+		protected function rules() {
+			return [
+				'name'                             => 'required|string',
+				'group_id'                         => 'nullable',
+				'agent'                            => 'boolean',
+				'type'                             => [
+					'required',
+					'in' => config('general.customer.types')
+				],
+				'pec'                              => 'required|email',
+				'notification_email'               => 'required|email',
+				'vat_number'                       => 'required|size:13',
+				'fiscal_code'                      => 'required|size:16',
+				'referent_first_name'              => 'required|string',
+				'referent_last_name'               => 'required|string',
+				'referent_email'                   => 'required|email',
+				'referent_phone'                   => 'required',
+				'headquarter_street'               => 'required|string',
+				'headquarter_city'                 => 'required|string',
+				'headquarter_province'             => 'required|string',
+				'legal_representatives_first_name' => 'required|string',
+				'legal_representatives_last_name'  => 'required|string',
+				'legal_representatives_street'     => 'required|string',
+				'legal_representatives_city'       => 'required|string',
+				'legal_representatives_province'   => 'required|string',
+				'note'                             => 'nullable'
+			];
+		}
 
 		public function submit() {
 			$this->validate();
@@ -91,7 +97,6 @@
 				'legal_representative_id' => $legal_representative->id,
 				'note'                    => $this->note,
 			]);
-
 			dd('Dati salvati');
 		}
 

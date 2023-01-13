@@ -16,16 +16,16 @@
 				$table->id();
 				$table->foreignIdFor(Customer::class, 'customer_id');
 				$table->string('name');
-				$table->float('power');
-				$table->string('censimp');
-				$table->string('pod');
+				$table->double('power');
+				$table->double('censimp');
+				$table->double('pod');
 				$table->enum('connection', [
 					'cessione_totale',
 					'cessione_parziale',
 					'scambio_sul_posto',
 					'vendita_seu'
 				]);
-				$table->float('tension');
+				$table->double('tension');
 				$table->string('street');
 				$table->string('city');
 				$table->string('province');

@@ -10,7 +10,7 @@
 	@if($for && $label)
 		<x-jet-label :for="$for" class="block text-sm font-medium text-gray-700">{{ $label }}</x-jet-label>
 	@endif
-	<div class="mt-1 relative">
+	<div class="@if($for && $label) mt-1 @endif relative">
 		@isset($prepend)
 			<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 				<x-icon :name="$prepend" class="h-5 w-5 text-gray-400"/>

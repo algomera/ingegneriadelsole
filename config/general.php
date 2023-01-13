@@ -33,6 +33,60 @@
 			'sales'       => [
 				'gse'    => 'GSE',
 				'trader' => 'Trader'
+			],
+			'sections'    => [
+				'adm'             => [
+					'label'    => 'AdM',
+					'children' => [
+						'proxy_compilation'      => 'Delega Compilazione',
+						'proxy_subscription'     => 'Delega Sottoscrizione',
+						'declaration'            => 'Dichiarazione',
+						'register_request'       => 'Richiesta Registro',
+						'triennial_verification' => 'Verifica Triennale'
+					]
+				],
+				'arera'           => [
+					'label'    => 'Arera',
+					'children' => [
+						'proxy_arera'        => 'Arera Delega',
+						'contribution'       => 'Contributo',
+						'investigation'      => 'Indagine',
+						'unbundling_support' => 'Assistenza Unbundling'
+					]
+				],
+				'gse'             => [
+					'label'    => 'GSE',
+					'children' => [
+						'fuel_mix'  => 'Fuel Mix',
+						'antimafia' => 'Antimafia',
+						'invoices'  => 'Fatture',
+						'seu'       => 'SEU',
+						'siad'      => 'Siad',
+						'checks'    => 'Controlli'
+					]
+				],
+				'terna'           => [
+					'label'    => 'Terna',
+					'children' => [
+						'g_stat' => 'G STAT'
+					]
+				],
+				'e_distribuzione' => [
+					'label'    => 'E-Distribuzione',
+					'children' => [
+						'new_concessions' => 'Nuove Concessioni',
+						'adjustments'     => 'Adeguamenti'
+					]
+				],
+				'reconciliation'  => [
+					'label' => 'Riconciliazione'
+				],
+				'maintenance'     => [
+					'label' => 'Manutenzione'
+				],
+				'ceo_management'  => [
+					'label' => 'Gestione CEO'
+				]
 			]
 		]
 	];
