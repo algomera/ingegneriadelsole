@@ -213,7 +213,7 @@
 			}
 			$this->emit('system-added');
 			$this->dispatchBrowserEvent('open-notification', [
-				'title' => 'Impianto Aggiunto',
+				'title' => 'Impianto aggiunto',
 				'type'  => 'success',
 			]);
 			$this->closeModal();

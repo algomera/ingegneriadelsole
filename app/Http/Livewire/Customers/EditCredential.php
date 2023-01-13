@@ -42,7 +42,7 @@
 			]);
 			$this->emit('credential-updated');
 			$this->dispatchBrowserEvent('open-notification', [
-				'title'    => 'Credenziale Modificata',
+				'title'    => 'Credenziale modificata',
 				'type' => 'success',
 			]);
 			$this->closeModal();

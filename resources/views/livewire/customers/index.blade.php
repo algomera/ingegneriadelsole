@@ -11,7 +11,7 @@
 		<ul role="list" class="divide-y divide-gray-200">
 			@forelse($customers as $customer)
 				<li class="flex items-start justify-between py-4">
-					<div x-data="{show: false}">
+					<div>
 						<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $customer->name }}</p>
 					</div>
 					<div class="flex items-center space-x-8">

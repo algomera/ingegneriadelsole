@@ -36,7 +36,7 @@
 			]);
 			$this->emit('credential-added');
 			$this->dispatchBrowserEvent('open-notification', [
-				'title'    => 'Credenziale Aggiunta',
+				'title'    => 'Credenziale aggiunta',
 				'type' => 'success',
 			]);
 			$this->closeModal();

@@ -13,8 +13,15 @@
 		<div class="p-4">
 			<ul role="list" class="divide-y divide-gray-200">
 				@forelse($customer->systems as $system)
-					<li class="py-4">
-						{{ $system->name }}
+					<li class="flex items-start justify-between py-4">
+						<div>
+							<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $system->name }}</p>
+						</div>
+						<div class="flex items-center space-x-8">
+							<div wire:click="$emit('openModal', 'systems.edit', {{ json_encode(['system' => $system->id]) }})">
+								<x-heroicon-o-pencil class="w-4 h-4 text-gray-500"></x-heroicon-o-pencil>
+							</div>
+						</div>
 					</li>
 					@empty
 					<p class="py-4 text-sm text-center text-gray-500">Nessun impianto inserito</p>
