@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Models;
+	namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+	use Illuminate\Database\Eloquent\Factories\HasFactory;
+	use Illuminate\Database\Eloquent\Model;
 
-class MTwo extends Model
-{
-    use HasFactory;
+	class MTwo extends Model
+	{
+		use HasFactory;
 
-	public function system() {
-		$this->belongsTo(System::class);
+		protected $guarded = [];
+
+		public function system() {
+			$this->belongsTo(System::class);
+		}
 	}
-}

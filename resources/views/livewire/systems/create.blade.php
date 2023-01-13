@@ -87,6 +87,46 @@
 			</div>
 		@endif
 		@if($currentStep === 4)
+			<div class="space-y-4">
+				<div class="border-b border-gray-200 pb-2 flex items-start justify-between">
+					<div>
+						<h3 class="text-lg font-medium leading-3 text-gray-900">M1</h3>
+						<p class="mt-2 max-w-4xl text-sm text-gray-500">Puoi aggiungere soltanto un M1</p>
+						<x-jet-input-error for="m_ones"></x-jet-input-error>
+					</div>
+					@if(count($m_ones) < 1)
+						<x-jet-button
+								wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '1'])}})">
+							Aggiungi
+						</x-jet-button>
+					@endif
+				</div>
+				<div>
+					@foreach($m_ones as $m_one)
+						<p wire:key="{{ $m_one['number'] }}">{{ $m_one['number'] }}</p>
+					@endforeach
+				</div>
+			</div>
+			<hr class="border-2">
+			<div class="space-y-4">
+				<div class="border-b border-gray-200 pb-2 flex items-start justify-between">
+					<div>
+						<h3 class="text-lg font-medium leading-3 text-gray-900">M2</h3>
+						<p class="mt-2 max-w-4xl text-sm text-gray-500">Puoi aggiungere più M2</p>
+					</div>
+					<x-jet-button
+							wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '2'])}})">
+						Aggiungi
+					</x-jet-button>
+				</div>
+				<div>
+					@foreach($m_twos as $m_two)
+						<p wire:key="{{ $m_two['number'] }}">{{ $m_two['number'] }}</p>
+					@endforeach
+				</div>
+			</div>
+		@endif
+		@if($currentStep === 5)
 			<ul role="list" class="divide-y divide-gray-200">
 				@foreach(config('general.system.sections') as $k => $section)
 					<li class="py-4">

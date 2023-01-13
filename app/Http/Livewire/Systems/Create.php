@@ -26,6 +26,10 @@
 				'label'       => "Step 4",
 				'description' => '',
 			],
+			5 => [
+				'label'       => "Step 5",
+				'description' => '',
+			],
 		];
 		public $name, $power, $censimp, $pod, $connection = 'cessione_totale', $tension, $street, $city, $province, $connection_date, $incentive = '1', $sale = 'gse', $company_code;
 		public $adm = false;
@@ -54,6 +58,22 @@
 		public $reconciliation = false;
 		public $maintenance = false;
 		public $ceo_management = false;
+		public $m_ones = [];
+		public $m_twos = [];
+		protected $listeners = [
+			'm-created' => 'MCreated'
+		];
+
+		public function MCreated($params) {
+			if ($params['type'] === "1") {
+				unset($params['type']);
+				$this->m_ones[] = $params;
+			} else if ($params['type'] === "2") {
+				unset($params['type']);
+				$this->m_twos[] = $params;
+			}
+			$this->emit('$refresh');
+		}
 
 		protected function rules() {
 			return [
@@ -79,11 +99,12 @@
 					'in' => config('general.system.sales')
 				],
 				'company_code'    => 'required',
+				'm_ones' => 'array|max:1',
 			];
 		}
 
 		public static function modalMaxWidth(): string {
-			return '4xl';
+			return '5xl';
 		}
 
 		public function mount($customer_id) {
@@ -130,13 +151,18 @@
 						'company_code'    => 'required',
 					]);
 					break;
+				case 4:
+					$this->validate([
+						'm_ones' => 'array|max:1',
+					]);
+					break;
 			}
 			$this->currentStep++;
 		}
 
 		public function save() {
 			$this->validate();
-			$this->customer->systems()->create([
+			$system = $this->customer->systems()->create([
 				'name'                   => $this->name,
 				'power'                  => $this->power,
 				'censimp'                => $this->censimp,
@@ -177,6 +203,14 @@
 				'maintenance'            => $this->maintenance,
 				'ceo_management'         => $this->ceo_management,
 			]);
+			if($this->m_ones) {
+				$system->m_one()->create($this->m_ones[0]);
+			}
+			if($this->m_twos) {
+				foreach ($this->m_twos as $m_two) {
+					$system->m_twos()->create($m_two);
+				}
+			}
 			$this->emit('system-added');
 			$this->dispatchBrowserEvent('open-notification', [
 				'title' => 'Impianto Aggiunto',
