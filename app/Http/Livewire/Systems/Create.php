@@ -8,7 +8,7 @@
 	class Create extends ModalComponent
 	{
 		public $customer;
-		public $currentStep = 1;
+		public $currentStep = 4;
 		public $steps = [
 			1 => [
 				'label'       => "Step 1",
@@ -73,6 +73,14 @@
 				$this->m_twos[] = $params;
 			}
 			$this->emit('$refresh');
+		}
+
+		public function deleteM1($k) {
+			unset($this->m_ones[$k]);
+		}
+
+		public function deleteM2($k) {
+			unset($this->m_twos[$k]);
 		}
 
 		protected function rules() {

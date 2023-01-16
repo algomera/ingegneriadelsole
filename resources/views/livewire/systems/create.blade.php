@@ -102,9 +102,21 @@
 					@endif
 				</div>
 				<div>
-					@foreach($m_ones as $m_one)
-						<p wire:key="{{ $m_one['number'] }}">{{ $m_one['number'] }}</p>
-					@endforeach
+					<ul role="list" class="divide-y divide-gray-200">
+						@foreach($m_ones as $k => $m_one)
+							<li wire:key="{{ $m_one['number'] }}"
+							    class="flex items-start justify-between py-4">
+								<div>
+									<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $m_one['number'] }}</p>
+								</div>
+								<div class="flex items-center space-x-8">
+									<div wire:click="deleteM1({{ $k }})">
+										<x-heroicon-o-trash class="w-4 h-4 text-red-500"></x-heroicon-o-trash>
+									</div>
+								</div>
+							</li>
+						@endforeach
+					</ul>
 				</div>
 			</div>
 			<hr class="border-2">
@@ -120,9 +132,21 @@
 					</x-jet-button>
 				</div>
 				<div>
-					@foreach($m_twos as $m_two)
-						<p wire:key="{{ $m_two['number'] }}">{{ $m_two['number'] }}</p>
-					@endforeach
+					<ul role="list" class="divide-y divide-gray-200">
+						@foreach($m_twos as $k => $m_two)
+							<li wire:key="{{ $m_two['number'] }}"
+							    class="flex items-start justify-between py-4">
+								<div>
+									<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $m_two['number'] }}</p>
+								</div>
+								<div class="flex items-center space-x-8">
+									<div wire:click="deleteM2({{ $k }})">
+										<x-heroicon-o-trash class="w-4 h-4 text-red-500"></x-heroicon-o-trash>
+									</div>
+								</div>
+							</li>
+						@endforeach
+					</ul>
 				</div>
 			</div>
 		@endif

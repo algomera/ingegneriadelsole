@@ -8,7 +8,7 @@
 	class Edit extends ModalComponent
 	{
 		public $system;
-		public $currentStep = 4;
+		public $currentStep = 1;
 		public $steps = [
 			1 => [
 				'label'       => "Step 1",
