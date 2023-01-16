@@ -156,7 +156,7 @@
 					<li class="py-4">
 						<div class="relative flex items-start">
 							<div class="flex h-5 items-center">
-								<x-jet-input wire:model="system.{{$k}}" type="checkbox" id="{{ $k }}"
+								<x-jet-input wire:model="system.{{$k}}" wire:click="updateSection('{{ $k }}')" type="checkbox" id="{{ $k }}"
 								             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"></x-jet-input>
 							</div>
 							<div class="ml-3 text-sm">

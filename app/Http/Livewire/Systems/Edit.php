@@ -161,6 +161,14 @@
 			$this->currentStep++;
 		}
 
+		public function updateSection($s) {
+			if($this->system->$s === false) {
+				foreach (config('general.system.sections.'.$s.'.children') as $k => $child) {
+					$this->system->$k = false;
+				}
+			}
+		}
+
 		public function save() {
 			$this->validate();
 			$this->system->update($this->validate()['system']);

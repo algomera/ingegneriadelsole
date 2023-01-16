@@ -8,7 +8,7 @@
 	class Create extends ModalComponent
 	{
 		public $customer;
-		public $currentStep = 4;
+		public $currentStep = 1;
 		public $steps = [
 			1 => [
 				'label'       => "Step 1",
@@ -109,6 +109,14 @@
 				'company_code'    => 'required',
 				'm_ones' => 'array|max:1',
 			];
+		}
+
+		public function updateSection($s) {
+			if($this->$s === false) {
+				foreach (config('general.system.sections.'.$s.'.children') as $k => $child) {
+					$this->$k = false;
+				}
+			}
 		}
 
 		public static function modalMaxWidth(): string {
