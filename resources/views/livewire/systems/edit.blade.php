@@ -4,17 +4,17 @@
 	</x-card-header>
 	<div class="p-4 space-y-6">
 		<nav aria-label="Progress">
-			<ol role="list" class="space-y-4 md:flex md:space-y-0 md:space-x-8">
+			<ol role="list" class="space-y-4 flex justify-around space-y-0 md:space-x-8">
 				@foreach($steps as $k => $step)
 					<li class="md:flex-1">
 						<!-- Completed Step -->
 						<div @class([
-        						'flex flex-col border-l-4 border-indigo-600 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep === $k,
-        						'group flex flex-col border-l-4 border-indigo-600 py-2 pl-4 hover:border-indigo-800 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep >= $k,
-        						'group flex flex-col border-l-4 border-gray-200 py-2 pl-4 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep <= $k,
+        						'flex flex-col border-t-4 border-indigo-600 py-2 px-2 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep === $k,
+        						'group flex flex-col border-t-4 border-indigo-600 py-2 px-2 hover:border-indigo-800 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep >= $k,
+        						'group flex flex-col border-t-4 border-gray-200 py-2 px-2 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep <= $k,
         					])>
 							<span class="text-sm font-medium text-indigo-600 group-hover:text-indigo-800">{{ $step['label'] }}</span>
-							<span class="text-sm font-medium">{{ $step['description'] }}</span>
+							<span class="hidden text-sm font-medium md:block">{{ $step['description'] }}</span>
 						</div>
 					</li>
 				@endforeach
@@ -141,7 +141,7 @@
 								</div>
 								<div class="flex items-center space-x-8">
 									<div wire:click="$emit('openModal', 'systems.edit-mtwo', {{ json_encode(['m_two' => $m_two->id]) }})">
-										<x-heroicon-o-pencil class="w-4 h-4 text-gray-500"></x-heroicon-o-pencil>
+										<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
 									</div>
 								</div>
 							</li>

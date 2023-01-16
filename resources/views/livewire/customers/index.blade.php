@@ -16,7 +16,7 @@
 					</div>
 					<div class="flex items-center space-x-8">
 						<a href="{{ route('customers.show', $customer->id) }}">
-							<x-heroicon-o-pencil class="w-4 h-4 text-gray-500"></x-heroicon-o-pencil>
+							<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
 						</a>
 					</div>
 				</li>

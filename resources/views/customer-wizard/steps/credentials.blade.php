@@ -45,12 +45,12 @@
 											<strong x-show="show">{{ $credential->password }}</strong>
 										</div>
 									</div>
-									<div class="flex items-center space-x-8">
+									<div class="flex items-center space-x-4">
 										<x-heroicon-o-trash wire:click="deleteCredential({{ $credential->id }})"
-										                    class="w-5 h-5 text-red-500"></x-heroicon-o-trash>
+										                    class="w-4 h-4 text-red-500 cursor-pointer hover:text-red-700"></x-heroicon-o-trash>
 										<x-heroicon-o-pencil
 												wire:click="$emit('openModal', 'customers.edit-credential', {{ json_encode(['credential_id' => $credential->id]) }})"
-												class="w-5 h-5 text-blue-500"></x-heroicon-o-pencil>
+												class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
 									</div>
 								</li>
 							@empty

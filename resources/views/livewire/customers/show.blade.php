@@ -15,11 +15,11 @@
 				@forelse($customer->systems as $system)
 					<li class="flex items-start justify-between py-4">
 						<div>
-							<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $system->name }}</p>
+							<a href="#" class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
 						</div>
 						<div class="flex items-center space-x-8">
 							<div wire:click="$emit('openModal', 'systems.edit', {{ json_encode(['system' => $system->id]) }})">
-								<x-heroicon-o-pencil class="w-4 h-4 text-gray-500"></x-heroicon-o-pencil>
+								<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
 							</div>
 						</div>
 					</li>
