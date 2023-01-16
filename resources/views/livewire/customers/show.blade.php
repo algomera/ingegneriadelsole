@@ -15,7 +15,7 @@
 				@forelse($customer->systems as $system)
 					<li class="flex items-start justify-between py-4">
 						<div>
-							<a href="#" class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
+							<a href="{{ route('customers.systems.show', [$customer->id, $system->id]) }}" class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
 						</div>
 						<div class="flex items-center space-x-8">
 							<div wire:click="$emit('openModal', 'systems.edit', {{ json_encode(['system' => $system->id]) }})">
