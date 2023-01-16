@@ -22,4 +22,8 @@ class System extends Model
 	public function m_twos() {
 		return $this->hasMany(MTwo::class);
 	}
+
+	public function adm() {
+		return $this->hasOne(Adm::class);
+	}
 }
