@@ -23,7 +23,7 @@ class System extends Model
 		return $this->hasMany(MTwo::class);
 	}
 
-	public function adm() {
+	public function section_adm() {
 		return $this->hasOne(Adm::class);
 	}
 }

@@ -11,6 +11,10 @@
 
 		protected $guarded = [];
 
+		protected $casts = [
+			'telemetering' => 'boolean'
+		];
+
 		public function system() {
 			return $this->belongsTo(System::class);
 		}

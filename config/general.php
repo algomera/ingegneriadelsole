@@ -36,13 +36,25 @@
 			],
 			'sections'    => [
 				'adm'             => [
-					'label'    => 'AdM',
-					'children' => [
+					'label'       => 'AdM',
+					'children'    => [
 						'proxy_compilation'      => 'Delega Compilazione',
 						'proxy_subscription'     => 'Delega Sottoscrizione',
 						'declaration'            => 'Dichiarazione',
 						'register_request'       => 'Richiesta Registro',
 						'triennial_verification' => 'Verifica Triennale'
+					],
+					'declaration' => [
+						'da_eseguire'    => 'Da eseguire',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'register'    => [
+						'da_richiedere'   => 'Da richiedere',
+						'non_applicabile' => 'Non applicabile',
+						'richiesto'       => 'Richiesto',
+						'ritirato'        => 'Ritirato'
 					]
 				],
 				'arera'           => [

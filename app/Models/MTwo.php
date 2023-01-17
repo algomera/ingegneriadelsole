@@ -10,6 +10,9 @@
 		use HasFactory;
 
 		protected $guarded = [];
+		protected $casts = [
+			'telemetering' => 'boolean'
+		];
 
 		public function system() {
 			$this->belongsTo(System::class);
