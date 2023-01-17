@@ -47,7 +47,12 @@
 				],
 				'system.section_adm.verification_execution_date'  => 'required|date',
 				'system.section_adm.verification_expiration_date' => 'required|date',
-				'system.section_adm.note'                         => 'nullable'
+				'system.section_adm.note'                         => 'nullable',
+				// Arera
+				'system.section_arera.contribution'               => '',
+				'system.section_arera.investigation'              => '',
+				'system.section_arera.unbundling'                 => '',
+				'system.section_arera.note'                       => 'nullable'
 			];
 		}
 
@@ -55,6 +60,7 @@
 			$this->customer = $customer;
 			$this->system = $system;
 			$this->system->section_adm = $system->section_adm;
+			$this->system->section_arera = $system->section_arera;
 			foreach (config('general.system.sections') as $k => $section) {
 				$this->tabs[] = [
 					'id'    => $k,
@@ -62,7 +68,8 @@
 				];
 			}
 			if ($this->tabs && $this->system[$this->tabs[0]['id']]) {
-				$this->currentTab = $this->tabs[0]['id'];
+				// TODO: Settare a 0 quando finito
+				$this->currentTab = $this->tabs[1]['id'];
 			}
 		}
 
@@ -83,6 +90,10 @@
 					'system_id' => $this->system->id
 				], $m_two->toArray());
 			}
+			// Arera
+			$arera = $this->system->section_arera()->updateOrCreate([
+				'system_id' => $this->system->id
+			], $validated['system']['section_arera']);
 		}
 
 		public function render() {

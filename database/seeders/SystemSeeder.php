@@ -33,7 +33,8 @@ class SystemSeeder extends Seeder
 			'incentive' => fake()->randomElement(array_keys(config('general.system.incentives'))),
 			'sale' => fake()->randomElement(array_keys(config('general.system.sales'))),
 			'company_code' => fake()->regexify('[A-Za-z0-9]{7}'),
-			'adm' => true
+			'adm' => true,
+			'arera' => true,
 	    ]);
 
 		MOne::create([

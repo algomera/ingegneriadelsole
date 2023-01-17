@@ -26,4 +26,8 @@ class System extends Model
 	public function section_adm() {
 		return $this->hasOne(Adm::class);
 	}
+
+	public function section_arera() {
+		return $this->hasOne(Arera::class);
+	}
 }

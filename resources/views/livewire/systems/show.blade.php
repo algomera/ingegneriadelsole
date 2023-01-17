@@ -12,7 +12,7 @@
 				<select wire:model="currentTab" id="tabs" name="tabs"
 				        class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
 					@foreach($tabs as $tab)
-						<option wire:key="{{ $tab['id'] }}" value="{{ $tab['id'] }}"
+						<option wire:key="tab-{{ $tab['id'] }}" value="{{ $tab['id'] }}"
 						        @if(!$this->system[$tab['id']]) disabled @endif>{{ $tab['label'] }}</option>
 					@endforeach
 				</select>
@@ -20,7 +20,7 @@
 			<div class="hidden lg:block">
 				<nav class="flex space-x-4" aria-label="Tabs">
 					@foreach($tabs as $tab)
-						<span wire:key="{{ $tab['id'] }}"
+						<span wire:key="mobile-tab-{{ $tab['id'] }}"
 						      @if($this->system[$tab['id']]) wire:click="$set('currentTab', '{{ $tab['id'] }}')" @endif @class([
         						'px-3 py-2 font-medium text-sm rounded-md',
         						'bg-gray-100 text-gray-700' => $currentTab === $tab['id'],
@@ -35,9 +35,9 @@
 			<div class="space-y-2">
 				@switch($currentTab)
 					@case('adm')
-						<div class="space-y-6 sm:space-y-5">
+						<div wire:key="section_adm" class="space-y-6 sm:space-y-5">
 							@if($system->m_one)
-								<div>
+								<div wire:key="adm_m_one">
 									<h3 class="text-sm font-bold">Misure (M1)</h3>
 									<div class="divide-y">
 										<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 py-2">
@@ -76,25 +76,28 @@
 								</div>
 							@endif
 							@if($system->m_twos)
-								<div>
+								<div wire:key="adm_m_twos">
 									<h3 class="text-sm font-bold">Misure (M2)</h3>
 									<div class="divide-y">
 										@foreach($system->m_twos as $k => $m_two)
-											<div wire:key="{{ $k }}" class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 py-2">
+											<div wire:key="m_two-{{ $k }}"
+											     class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 py-2">
 												<x-jet-label>
 													{{ $m_two->number }}
 												</x-jet-label>
 												<div class="mt-1 sm:col-span-2 sm:mt-0">
 													<div class="flex max-w-lg">
 														<div class="w-full">
-															<div wire:click="updateSystemMTwoTelemetering({{ $m_two->id }})" class="flex items-center space-x-2">
+															<div wire:click="updateSystemMTwoTelemetering({{ $m_two->id }})"
+															     class="flex items-center space-x-2">
 																<x-jet-checkbox
 																		wire:model="system.m_twos.{{$k}}.telemetering"
 																		id="system.m_twos.{{$k}}.telemetering"></x-jet-checkbox>
 																<x-jet-label for="system.m_twos.{{$k}}.telemetering">
 																	Telelettura
 																</x-jet-label>
-																<x-jet-input-error for="system.m_twos.{{$k}}.telemetering"></x-jet-input-error>
+																<x-jet-input-error
+																		for="system.m_twos.{{$k}}.telemetering"></x-jet-input-error>
 															</div>
 															@if($m_two->telemetering)
 																<div class="mt-2 space-y-2">
@@ -128,8 +131,10 @@
 									<div class="flex max-w-lg">
 										<div class="w-full">
 											<x-select wire:model="system.section_adm.declaration">
+												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.adm.declaration') as $k => $label)
-													<option wire:key="{{ $k }}" value="{{ $k }}">{{ $label }}</option>
+													<option wire:key="adm-declaration-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
 												@endforeach
 											</x-select>
 											<x-jet-input-error for="system.section_adm.declaration"></x-jet-input-error>
@@ -143,8 +148,10 @@
 									<div class="flex max-w-lg">
 										<div class="w-full">
 											<x-select wire:model="system.section_adm.register">
+												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.adm.register') as $k => $label)
-													<option wire:key="{{ $k }}" value="{{ $k }}">{{ $label }}</option>
+													<option wire:key="adm-register-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
 												@endforeach
 											</x-select>
 											<x-jet-input-error for="system.section_adm.register"></x-jet-input-error>
@@ -183,6 +190,69 @@
 									<div class="flex max-w-lg">
 										<div class="w-full">
 											<x-textarea wire:model.defer="system.section_adm.note"></x-textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						@break
+					@case('arera')
+						<div wire:key="section_arera" class="space-y-6 sm:space-y-5">
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Contributo</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="system.section_arera.contribution">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.arera.contribution') as $k => $label)
+													<option wire:key="arera-contribution-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Indagine</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="system.section_arera.investigation">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.arera.investigation') as $k => $label)
+													<option wire:key="arera-investigation-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Unbundling</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="system.section_arera.unbundling">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.arera.unbundling') as $k => $label)
+													<option wire:key="arera-unbundling-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Note aggiuntive
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-textarea wire:model.defer="system.section_arera.note"></x-textarea>
 										</div>
 									</div>
 								</div>

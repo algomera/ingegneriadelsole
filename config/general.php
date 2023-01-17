@@ -58,12 +58,30 @@
 					]
 				],
 				'arera'           => [
-					'label'    => 'Arera',
-					'children' => [
+					'label'         => 'Arera',
+					'children'      => [
 						'proxy_arera'        => 'Arera Delega',
 						'contribution'       => 'Contributo',
 						'investigation'      => 'Indagine',
 						'unbundling_support' => 'Assistenza Unbundling'
+					],
+					'contribution'  => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'investigation' => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'unbundling'    => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
 					]
 				],
 				'gse'             => [
