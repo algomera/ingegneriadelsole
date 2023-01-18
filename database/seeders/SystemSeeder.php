@@ -39,7 +39,11 @@
 				'fuel_mix'        => true,
 				'antimafia'       => true,
 				'invoices'        => true,
-				'seu'             => true
+				'seu'             => true,
+				'terna'           => true,
+				'reconciliation'  => true,
+				'maintenance'     => true,
+				'ceo_management'  => true,
 			]);
 			MOne::create([
 				'system_id' => 1,

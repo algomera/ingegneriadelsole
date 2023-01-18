@@ -208,6 +208,12 @@
 					'label'    => 'Terna',
 					'children' => [
 						'g_stat' => 'G STAT'
+					],
+					'gstat'    => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
 					]
 				],
 				'reconciliation'  => [

@@ -92,6 +92,8 @@
 				'section_gse.invoice_november'                                => 'string',
 				'section_gse.invoice_december'                                => 'string',
 				'section_gse.seu'                                             => 'string',
+				// Terna
+				'section_terna.gstat'                                         => 'string',
 			];
 		}
 
@@ -151,6 +153,9 @@
 				'invoice_november'  => null,
 				'invoice_december'  => null,
 				'seu'               => null
+			];
+			$this->section_terna = $system->section_terna ?: [
+				'gstat' => null,
 			];
 			foreach (config('general.system.sections') as $k => $section) {
 				$this->tabs[] = [
@@ -385,6 +390,19 @@
 						'invoice_november'  => $this->section_gse['invoice_november'] ?: null,
 						'invoice_december'  => $this->section_gse['invoice_december'] ?: null,
 						'seu'               => $this->section_gse['seu'] ?: null,
+					]);
+					break;
+				case 'terna':
+					$validated = $this->validate([
+						'section_terna.gstat' => [
+							'in' => config('general.system.sections.terna.gstat')
+						],
+					]);
+					// Terna
+					$terna = $this->system->section_terna()->updateOrCreate([
+						'system_id' => $this->system->id
+					], [
+						'gstat' => $this->section_terna['gstat'] ?: null,
 					]);
 					break;
 			}

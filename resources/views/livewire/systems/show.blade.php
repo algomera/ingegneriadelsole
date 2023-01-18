@@ -867,6 +867,34 @@
 							</div>
 						</div>
 						@break
+					@case('terna')
+						<div wire:key="section_terna" class="space-y-6 sm:space-y-5">
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">GSTAT</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_terna.gstat"
+											          for="section_terna.gstat">
+												<option value="" selected>Seleziona</option>
+												@foreach(config('general.system.sections.terna.gstat') as $k => $label)
+													<option wire:key="terna-gstat-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('terna')">Salva</x-jet-button>
+									</div>
+								</div>
+							</div>
+						</div>
+						@break
 					@case(null)
 						<p class="text-sm text-center text-gray-500 py-5">
 							Nessuna sezione disponibile per questo impianto.
