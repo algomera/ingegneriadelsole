@@ -130,14 +130,13 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-select wire:model="system.section_adm.declaration">
+											<x-select wire:model="section_adm.declaration" for="section_adm.declaration">
 												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.adm.declaration') as $k => $label)
 													<option wire:key="adm-declaration-{{ $k }}"
 													        value="{{ $k }}">{{ $label }}</option>
 												@endforeach
 											</x-select>
-											<x-jet-input-error for="system.section_adm.declaration"></x-jet-input-error>
 										</div>
 									</div>
 								</div>
@@ -147,14 +146,13 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-select wire:model="system.section_adm.register">
+											<x-select wire:model="section_adm.register" for="section_adm.register">
 												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.adm.register') as $k => $label)
 													<option wire:key="adm-register-{{ $k }}"
 													        value="{{ $k }}">{{ $label }}</option>
 												@endforeach
 											</x-select>
-											<x-jet-input-error for="system.section_adm.register"></x-jet-input-error>
 										</div>
 									</div>
 								</div>
@@ -166,8 +164,8 @@
 									<div class="flex max-w-lg">
 										<div class="w-full">
 											<x-jet-input
-													wire:model.defer="system.section_adm.verification_execution_date"
-													for="system.section_adm.verification_execution_date" type="date"
+													wire:model.defer="section_adm.verification_execution_date"
+													for="section_adm.verification_execution_date" type="date"
 													label="Data di esecuzione"></x-jet-input>
 										</div>
 									</div>
@@ -176,8 +174,8 @@
 									<div class="flex max-w-lg">
 										<div class="w-full">
 											<x-jet-input
-													wire:model.defer="system.section_adm.verification_expiration_date"
-													for="system.section_adm.verification_expiration_date" type="date"
+													wire:model.defer="section_adm.verification_expiration_date"
+													for="section_adm.verification_expiration_date" type="date"
 													label="Data di scadenza"></x-jet-input>
 										</div>
 									</div>
@@ -189,8 +187,15 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-textarea wire:model.defer="system.section_adm.note"></x-textarea>
+											<x-textarea wire:model.defer="section_adm.note"></x-textarea>
 										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('adm')">Salva</x-jet-button>
 									</div>
 								</div>
 							</div>
@@ -203,7 +208,7 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-select wire:model="system.section_arera.contribution">
+											<x-select wire:model="section_arera.contribution" for="section_arera.contribution">
 												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.arera.contribution') as $k => $label)
 													<option wire:key="arera-contribution-{{ $k }}"
@@ -219,7 +224,7 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-select wire:model="system.section_arera.investigation">
+											<x-select wire:model="section_arera.investigation" for="section_arera.investigation">
 												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.arera.investigation') as $k => $label)
 													<option wire:key="arera-investigation-{{ $k }}"
@@ -235,7 +240,7 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-select wire:model="system.section_arera.unbundling">
+											<x-select wire:model="section_arera.unbundling" for="section_arera.unbundling">
 												<option value="null" selected>Seleziona</option>
 												@foreach(config('general.system.sections.arera.unbundling') as $k => $label)
 													<option wire:key="arera-unbundling-{{ $k }}"
@@ -252,8 +257,346 @@
 								<div class="mt-1 sm:col-span-2 sm:mt-0">
 									<div class="flex max-w-lg">
 										<div class="w-full">
-											<x-textarea wire:model.defer="system.section_arera.note"></x-textarea>
+											<x-textarea wire:model.defer="section_arera.note"></x-textarea>
 										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('arera')">Salva</x-jet-button>
+									</div>
+								</div>
+							</div>
+						</div>
+						@break
+					@case('e_distribuzione')
+						<div wire:key="section_e_distribuzione" class="space-y-6 sm:space-y-5">
+							<h3 class="font-bold">Connessioni</h3>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Documenti</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.documents" for="section_e_distribuzione.documents">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.documents') as $k => $label)
+													<option wire:key="e_distribuzione-documents-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Domanda</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.question" for="section_e_distribuzione.question">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.question') as $k => $label)
+													<option wire:key="e_distribuzione-question-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Preventivo</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.quotation" for="section_e_distribuzione.quotation">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.quotation') as $k => $label)
+													<option wire:key="e_distribuzione-quotation-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Inizio Iter</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.start_of_process" for="section_e_distribuzione.start_of_process">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.start_of_process') as $k => $label)
+													<option wire:key="e_distribuzione-start_of_process-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Fine Iter</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.end_of_process" for="section_e_distribuzione.end_of_process">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.end_of_process') as $k => $label)
+													<option wire:key="e_distribuzione-end_of_process-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Inizio Lavori</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.start_of_work" for="section_e_distribuzione.start_of_work">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.start_of_work') as $k => $label)
+													<option wire:key="e_distribuzione-start_of_work-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Fine Lavori</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.end_of_work" for="section_e_distribuzione.end_of_work">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.end_of_work') as $k => $label)
+													<option wire:key="e_distribuzione-end_of_work-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Censimp</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.censimp" for="section_e_distribuzione.censimp">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.censimp') as $k => $label)
+													<option wire:key="e_distribuzione-censimp-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">RdE</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.rde" for="section_e_distribuzione.rde">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.rde') as $k => $label)
+													<option wire:key="e_distribuzione-rde-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Scheda Apparato Misura</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.measurement_card" for="section_e_distribuzione.measurement_card">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.measurement_card') as $k => $label)
+													<option wire:key="e_distribuzione-measurement_card-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Attivazione</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.activation" for="section_e_distribuzione.activation">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.activation') as $k => $label)
+													<option wire:key="e_distribuzione-activation-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">GSE</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.gse" for="section_e_distribuzione.gse">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.gse') as $k => $label)
+													<option wire:key="e_distribuzione-gse-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Connessione</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.connection" for="section_e_distribuzione.connection">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.connection') as $k => $label)
+													<option wire:key="e_distribuzione-connection-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Tipo Impianto</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-select wire:model="section_e_distribuzione.system_type" for="section_e_distribuzione.system_type">
+												<option value="null" selected>Seleziona</option>
+												@foreach(config('general.system.sections.e_distribuzione.system_type') as $k => $label)
+													<option wire:key="e_distribuzione-system_type-{{ $k }}"
+													        value="{{ $k }}">{{ $label }}</option>
+												@endforeach
+											</x-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Note aggiuntive
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-textarea wire:model.defer="section_e_distribuzione.connections_note"></x-textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<h3 class="font-bold">Adeguamenti</h3>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">SPI
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.spi_execution_date"
+													for="section_e_distribuzione.spi_execution_date" type="date"
+													label="Data di esecuzione"></x-jet-input>
+										</div>
+									</div>
+								</div>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.spi_expiration_date"
+													for="section_e_distribuzione.spi_expiration_date" type="date"
+													label="Data di scadenza"></x-jet-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">SPG
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.spg_execution_date"
+													for="section_e_distribuzione.spg_execution_date" type="date"
+													label="Data di esecuzione"></x-jet-input>
+										</div>
+									</div>
+								</div>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.spg_expiration_date"
+													for="section_e_distribuzione.spg_expiration_date" type="date"
+													label="Data di scadenza"></x-jet-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Verifica di Terra
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.ground_verification_execution_date"
+													for="section_e_distribuzione.ground_verification_execution_date" type="date"
+													label="Data di esecuzione"></x-jet-input>
+										</div>
+									</div>
+								</div>
+								<div class="mt-1 sm:col-span-1 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-jet-input
+													wire:model.defer="section_e_distribuzione.ground_verification_expiration_date"
+													for="section_e_distribuzione.ground_verification_expiration_date" type="date"
+													label="Data di scadenza"></x-jet-input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Note aggiuntive
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-textarea wire:model.defer="section_e_distribuzione.adjustments_note"></x-textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('e_distribuzione')">Salva</x-jet-button>
 									</div>
 								</div>
 							</div>
@@ -268,11 +611,4 @@
 			</div>
 		</div>
 	</div>
-	@if($currentTab)
-		<x-card-footer>
-			<x-slot:right_actions>
-				<x-jet-button wire:click="save">Salva</x-jet-button>
-			</x-slot:right_actions>
-		</x-card-footer>
-	@endif
 </x-card>

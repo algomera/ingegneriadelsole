@@ -96,7 +96,7 @@
 				'system.terna'                  => 'boolean',
 				'system.g_stat'                 => 'boolean',
 				'system.e_distribuzione'        => 'boolean',
-				'system.new_concessions'        => 'boolean',
+				'system.new_connections'        => 'boolean',
 				'system.adjustments'            => 'boolean',
 				'system.reconciliation'         => 'boolean',
 				'system.maintenance'            => 'boolean',

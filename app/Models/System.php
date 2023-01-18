@@ -30,4 +30,8 @@ class System extends Model
 	public function section_arera() {
 		return $this->hasOne(Arera::class);
 	}
+
+	public function section_e_distribuzione() {
+		return $this->hasOne(EDistribuzione::class);
+	}
 }

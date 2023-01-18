@@ -84,6 +84,92 @@
 						'inviata'        => 'Inviata'
 					]
 				],
+				'e_distribuzione' => [
+					'label'            => 'E-Distribuzione',
+					'children'         => [
+						'new_connections' => 'Nuove Connessioni',
+						'adjustments'     => 'Adeguamenti'
+					],
+					'documents'        => [
+						'non_completi'    => 'Non completi',
+						'in_preparazione' => 'In preparazione',
+						'completi'        => 'Completi'
+					],
+					'question'         => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'quotation'        => [
+						'da_ricevere' => 'Da ricevere',
+						'ricevuto'    => 'Ricevuto',
+						'accettato'   => 'Accettato'
+					],
+					'start_of_process' => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'end_of_process'   => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'start_of_work'    => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'end_of_work'      => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'censimp'          => [
+						'non_eseguita' => 'Non eseguita',
+						'registrata'   => 'Registrata',
+						'validata'     => 'Validata',
+						'upnr'         => 'UPNR'
+					],
+					'rde'              => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'measurement_card' => [
+						'non_applicabile' => 'Non applicabile',
+						'non_eseguita'    => 'Non eseguita',
+						'in_lavorazione'  => 'In lavorazione',
+						'eseguita'        => 'Eseguita',
+						'inviata'         => 'Inviata'
+					],
+					'activation'       => [
+						'non_eseguita' => 'Non eseguita',
+						'eseguita'     => 'Eseguita',
+					],
+					'gse'              => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'connection'       => [
+						'cessione_parziale' => 'Cessione parziale',
+						'ssp'               => 'SSP',
+						'cessione_totale'   => 'Cessione totale'
+					],
+					'system_type' => [
+						'normale' => 'Normale',
+						'bonus' => 'Bonus',
+						'sconto_fattura' => 'Sconto fattura'
+					],
+				],
 				'gse'             => [
 					'label'    => 'GSE',
 					'children' => [
@@ -99,13 +185,6 @@
 					'label'    => 'Terna',
 					'children' => [
 						'g_stat' => 'G STAT'
-					]
-				],
-				'e_distribuzione' => [
-					'label'    => 'E-Distribuzione',
-					'children' => [
-						'new_concessions' => 'Nuove Concessioni',
-						'adjustments'     => 'Adeguamenti'
 					]
 				],
 				'reconciliation'  => [

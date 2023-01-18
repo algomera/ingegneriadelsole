@@ -35,6 +35,7 @@ return new class extends Migration
 		        'eseguita',
 		        'inviata'
 	        ]);
+	        $table->text('note')->nullable();
             $table->timestamps();
         });
     }

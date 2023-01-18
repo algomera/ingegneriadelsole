@@ -70,7 +70,7 @@
 				$table->boolean('g_stat')->default(false);
 				// E-DISTRIBUZIONE
 				$table->boolean('e_distribuzione')->default(false);
-				$table->boolean('new_concessions')->default(false);
+				$table->boolean('new_connections')->default(false);
 				$table->boolean('adjustments')->default(false);
 				$table->boolean('reconciliation')->default(false);
 				$table->boolean('maintenance')->default(false);
