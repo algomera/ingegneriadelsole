@@ -42,4 +42,8 @@
 		public function section_terna() {
 			return $this->hasOne(Terna::class);
 		}
+
+		public function section_reconciliation() {
+			return $this->hasOne(Reconciliation::class);
+		}
 	}

@@ -94,6 +94,8 @@
 				'section_gse.seu'                                             => 'string',
 				// Terna
 				'section_terna.gstat'                                         => 'string',
+				// Riconciliazione
+				'section_reconciliation.reconciliation'                       => 'string',
 			];
 		}
 
@@ -156,6 +158,9 @@
 			];
 			$this->section_terna = $system->section_terna ?: [
 				'gstat' => null,
+			];
+			$this->section_reconciliation = $system->section_reconciliation ?: [
+				'reconciliation' => null,
 			];
 			foreach (config('general.system.sections') as $k => $section) {
 				$this->tabs[] = [
@@ -403,6 +408,19 @@
 						'system_id' => $this->system->id
 					], [
 						'gstat' => $this->section_terna['gstat'] ?: null,
+					]);
+					break;
+				case 'reconciliation':
+					$validated = $this->validate([
+						'section_reconciliation.reconciliation' => [
+							'in' => config('general.system.sections.reconciliation.reconciliation')
+						],
+					]);
+					// Riconciliazione
+					$reconciliation = $this->system->section_reconciliation()->updateOrCreate([
+						'system_id' => $this->system->id
+					], [
+						'reconciliation' => $this->section_reconciliation['reconciliation'] ?: null,
 					]);
 					break;
 			}

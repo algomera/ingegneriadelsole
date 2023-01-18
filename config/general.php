@@ -217,7 +217,13 @@
 					]
 				],
 				'reconciliation'  => [
-					'label' => 'Riconciliazione'
+					'label'          => 'Riconciliazione',
+					'reconciliation' => [
+						'non_eseguita'   => 'Non eseguita',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata',
+					]
 				],
 				'maintenance'     => [
 					'label' => 'Manutenzione'
