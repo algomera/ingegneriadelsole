@@ -46,4 +46,12 @@
 		public function section_reconciliation() {
 			return $this->hasOne(Reconciliation::class);
 		}
+
+		public function section_maintenance() {
+			return $this->hasOne(Maintenance::class);
+		}
+
+		public function section_ceo_management() {
+			return $this->hasOne(CeoManagement::class);
+		}
 	}

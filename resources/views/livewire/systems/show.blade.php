@@ -923,6 +923,50 @@
 							</div>
 						</div>
 						@break
+					@case('maintenance')
+						<div wire:key="section_maintenance" class="space-y-6 sm:space-y-5">
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Note aggiuntive
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-textarea wire:model.defer="section_maintenance.note"></x-textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('maintenance')">Salva</x-jet-button>
+									</div>
+								</div>
+							</div>
+						</div>
+						@break
+					@case('ceo_management')
+						<div wire:key="section_ceo_management" class="space-y-6 sm:space-y-5">
+							<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+								<x-jet-label class="self-center font-bold">Note aggiuntive
+								</x-jet-label>
+								<div class="mt-1 sm:col-span-2 sm:mt-0">
+									<div class="flex max-w-lg">
+										<div class="w-full">
+											<x-textarea wire:model.defer="section_ceo_management.note"></x-textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="border-t border-gray-200 bg-white pt-5 rounded-b-xl">
+								<div class="-ml-4 -mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap">
+									<div class="ml-4 mt-2 flex-shrink-0">
+										<x-jet-button wire:click="save('ceo_management')">Salva</x-jet-button>
+									</div>
+								</div>
+							</div>
+						</div>
+						@break
 					@case(null)
 						<p class="text-sm text-center text-gray-500 py-5">
 							Nessuna sezione disponibile per questo impianto.

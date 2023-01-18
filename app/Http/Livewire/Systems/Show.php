@@ -96,6 +96,10 @@
 				'section_terna.gstat'                                         => 'string',
 				// Riconciliazione
 				'section_reconciliation.reconciliation'                       => 'string',
+				// Manutenzione
+				'section_maintenance.note'                                    => 'nullable',
+				// Gestione CEO
+				'section_ceo_management.note'                                 => 'nullable',
 			];
 		}
 
@@ -161,6 +165,12 @@
 			];
 			$this->section_reconciliation = $system->section_reconciliation ?: [
 				'reconciliation' => null,
+			];
+			$this->section_maintenance = $system->section_maintenance ?: [
+				'note' => null,
+			];
+			$this->section_ceo_management = $system->section_ceo_management ?: [
+				'note' => null,
 			];
 			foreach (config('general.system.sections') as $k => $section) {
 				$this->tabs[] = [
@@ -423,7 +433,33 @@
 						'reconciliation' => $this->section_reconciliation['reconciliation'] ?: null,
 					]);
 					break;
+				case 'maintenance':
+					$validated = $this->validate([
+						'section_maintenance.note' => 'nullable',
+					]);
+					// Manutenzione
+					$maintenance = $this->system->section_maintenance()->updateOrCreate([
+						'system_id' => $this->system->id
+					], [
+						'note' => $this->section_maintenance['note'] ?: null,
+					]);
+					break;
+				case 'ceo_management':
+					$validated = $this->validate([
+						'section_ceo_management.note' => 'nullable',
+					]);
+					// Manutenzione
+					$ceo_management = $this->system->section_ceo_management()->updateOrCreate([
+						'system_id' => $this->system->id
+					], [
+						'note' => $this->section_ceo_management['note'] ?: null,
+					]);
+					break;
 			}
+			$this->dispatchBrowserEvent('open-notification', [
+				'title' => 'Sezione aggiornata',
+				'type'  => 'success',
+			]);
 		}
 
 		public function render() {
