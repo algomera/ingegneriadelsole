@@ -22,13 +22,13 @@ return new class extends Migration
 				'in_lavorazione',
 				'eseguita',
 				'inviata'
-			]);
+			])->nullable();
 			$table->enum('register', [
 				'da_richiedere',
 				'non_applicabile',
 				'richiesto',
 				'ritirato',
-			]);
+			])->nullable();
 			$table->date('verification_execution_date');
 			$table->date('verification_expiration_date');
 			$table->text('note')->nullable();

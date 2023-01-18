@@ -164,21 +164,44 @@
 						'ssp'               => 'SSP',
 						'cessione_totale'   => 'Cessione totale'
 					],
-					'system_type' => [
-						'normale' => 'Normale',
-						'bonus' => 'Bonus',
+					'system_type'      => [
+						'normale'        => 'Normale',
+						'bonus'          => 'Bonus',
 						'sconto_fattura' => 'Sconto fattura'
 					],
 				],
 				'gse'             => [
-					'label'    => 'GSE',
-					'children' => [
+					'label'     => 'GSE',
+					'children'  => [
 						'fuel_mix'  => 'Fuel Mix',
 						'antimafia' => 'Antimafia',
 						'invoices'  => 'Fatture',
 						'seu'       => 'SEU',
 						'siad'      => 'Siad',
 						'checks'    => 'Controlli'
+					],
+					'fuel_mix'  => [
+						'da_eseguire'    => 'Da eseguire',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
+					],
+					'antimafia' => [
+						'da_rinnovare'   => 'Da rinnovare',
+						'da_eseguire'    => 'Da eseguire',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'inviata',
+					],
+					'invoices'  => [
+						'eseguita'     => 'Eseguita',
+						'non_eseguita' => 'Non eseguita'
+					],
+					'seu'       => [
+						'da_eseguire'    => 'Da eseguire',
+						'in_lavorazione' => 'In lavorazione',
+						'eseguita'       => 'Eseguita',
+						'inviata'        => 'Inviata'
 					]
 				],
 				'terna'           => [

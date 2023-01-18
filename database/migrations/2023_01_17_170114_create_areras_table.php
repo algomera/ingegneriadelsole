@@ -22,19 +22,19 @@ return new class extends Migration
 		        'in_lavorazione',
 		        'eseguita',
 		        'inviata'
-	        ]);
+	        ])->nullable();
 	        $table->enum('investigation', [
 		        'non_eseguita',
 		        'in_lavorazione',
 		        'eseguita',
 		        'inviata'
-	        ]);
+	        ])->nullable();
 	        $table->enum('unbundling', [
 		        'non_eseguita',
 		        'in_lavorazione',
 		        'eseguita',
 		        'inviata'
-	        ]);
+	        ])->nullable();
 	        $table->text('note')->nullable();
             $table->timestamps();
         });

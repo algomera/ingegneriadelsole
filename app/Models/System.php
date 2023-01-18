@@ -34,4 +34,8 @@ class System extends Model
 	public function section_e_distribuzione() {
 		return $this->hasOne(EDistribuzione::class);
 	}
+
+	public function section_gse() {
+		return $this->hasOne(Gse::class);
+	}
 }

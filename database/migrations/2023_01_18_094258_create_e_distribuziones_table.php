@@ -19,81 +19,81 @@
 					'non_completi',
 					'in_preparazione',
 					'completi',
-				]);
+				])->nullable();
 				$table->enum('question', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('quotation', [
 					'da_ricevere',
 					'ricevuto',
 					'accettato',
-				]);
+				])->nullable();
 				$table->enum('start_of_process', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('end_of_process', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('start_of_work', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('end_of_work', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('censimp', [
 					'non_eseguita',
 					'registrata',
 					'validata',
 					'upnr',
-				]);
+				])->nullable();
 				$table->enum('rde', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('measurement_card', [
 					'non_applicabile',
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('activation', [
 					'non_eseguita',
 					'eseguita',
-				]);
+				])->nullable();
 				$table->enum('gse', [
 					'non_eseguita',
 					'in_lavorazione',
 					'eseguita',
 					'inviata',
-				]);
+				])->nullable();
 				$table->enum('connection', [
 					'cessione_parziale',
 					'ssp',
 					'cessione_totale',
-				]);
+				])->nullable();
 				$table->enum('system_type', [
 					'normale',
 					'bonus',
 					'sconto_fattura',
-				]);
+				])->nullable();
 				$table->text('connections_note')->nullable();
 				$table->date('spi_execution_date');
 				$table->date('spi_expiration_date');

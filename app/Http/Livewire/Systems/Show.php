@@ -76,6 +76,22 @@
 				'section_e_distribuzione.ground_verification_execution_date'  => 'required|date',
 				'section_e_distribuzione.ground_verification_expiration_date' => 'required|date',
 				'section_e_distribuzione.adjustments_note'                    => 'nullable',
+				// GSE
+				'section_gse.fuel_mix'                                        => 'string',
+				'section_gse.antimafia'                                       => 'string',
+				'section_gse.invoice_january'                                 => 'string',
+				'section_gse.invoice_february'                                => 'string',
+				'section_gse.invoice_march'                                   => 'string',
+				'section_gse.invoice_april'                                   => 'string',
+				'section_gse.invoice_may'                                     => 'string',
+				'section_gse.invoice_june'                                    => 'string',
+				'section_gse.invoice_july'                                    => 'string',
+				'section_gse.invoice_august'                                  => 'string',
+				'section_gse.invoice_september'                               => 'string',
+				'section_gse.invoice_october'                                 => 'string',
+				'section_gse.invoice_november'                                => 'string',
+				'section_gse.invoice_december'                                => 'string',
+				'section_gse.seu'                                             => 'string',
 			];
 		}
 
@@ -119,6 +135,23 @@
 				'ground_verification_expiration_date' => '',
 				'adjustments_note'                    => '',
 			];
+			$this->section_gse = $system->section_gse ?: [
+				'fuel_mix'          => null,
+				'antimafia'         => null,
+				'invoice_january'   => null,
+				'invoice_february'  => null,
+				'invoice_march'     => null,
+				'invoice_april'     => null,
+				'invoice_may'       => null,
+				'invoice_june'      => null,
+				'invoice_july'      => null,
+				'invoice_august'    => null,
+				'invoice_september' => null,
+				'invoice_october'   => null,
+				'invoice_november'  => null,
+				'invoice_december'  => null,
+				'seu'               => null
+			];
 			foreach (config('general.system.sections') as $k => $section) {
 				$this->tabs[] = [
 					'id'    => $k,
@@ -150,11 +183,9 @@
 						'system.m_twos.*.customer'                 => 'string',
 						// AdM
 						'section_adm.declaration'                  => [
-							'required',
 							'in' => config('general.system.sections.adm.declaration')
 						],
 						'section_adm.register'                     => [
-							'required',
 							'in' => config('general.system.sections.adm.register')
 						],
 						'section_adm.verification_execution_date'  => 'required|date',
@@ -164,7 +195,13 @@
 					// AdM
 					$adm = $this->system->section_adm()->updateOrCreate([
 						'system_id' => $this->system->id
-					], $validated['section_adm']);
+					], [
+						'declaration'                  => $this->section_adm->declaration ?: null,
+						'register'                     => $this->section_adm->register ?: null,
+						'verification_execution_date'  => $this->section_adm->verification_execution_date ?: null,
+						'verification_expiration_date' => $this->section_adm->verification_expiration_date ?: null,
+						'note'                         => $this->section_adm->note ?: null
+					]);
 					// M1
 					$m1 = $this->system->m_one()->updateOrCreate([
 						'system_id' => $this->system->id
@@ -181,15 +218,12 @@
 					$validated = $this->validate([
 						// Arera
 						'section_arera.contribution'  => [
-							'required',
 							'in' => config('general.system.sections.arera.contribution')
 						],
 						'section_arera.investigation' => [
-							'required',
 							'in' => config('general.system.sections.arera.investigation')
 						],
 						'section_arera.unbundling'    => [
-							'required',
 							'in' => config('general.system.sections.arera.unbundling')
 						],
 						'section_arera.note'          => 'nullable'
@@ -197,64 +231,55 @@
 					// Arera
 					$arera = $this->system->section_arera()->updateOrCreate([
 						'system_id' => $this->system->id
-					], $validated['section_arera']);
+					], [
+						'contribution'  => $this->section_arera['contribution'] ?: null,
+						'investigation' => $this->section_arera['investigation'] ?: null,
+						'unbundling'    => $this->section_arera['unbundling'] ?: null,
+						'note'          => $this->section_arera['note'] ?: null
+					]);
 					break;
 				case 'e_distribuzione':
 					$validated = $this->validate([
 						'section_e_distribuzione.documents'                           => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.documents')
 						],
 						'section_e_distribuzione.question'                            => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.question')
 						],
 						'section_e_distribuzione.quotation'                           => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.quotation')
 						],
 						'section_e_distribuzione.start_of_process'                    => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.start_of_process')
 						],
 						'section_e_distribuzione.end_of_process'                      => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.end_of_process')
 						],
 						'section_e_distribuzione.start_of_work'                       => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.start_of_work')
 						],
 						'section_e_distribuzione.end_of_work'                         => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.end_of_work')
 						],
 						'section_e_distribuzione.censimp'                             => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.censimp')
 						],
 						'section_e_distribuzione.rde'                                 => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.rde')
 						],
 						'section_e_distribuzione.measurement_card'                    => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.measurement_card')
 						],
 						'section_e_distribuzione.activation'                          => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.activation')
 						],
 						'section_e_distribuzione.gse'                                 => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.gse')
 						],
 						'section_e_distribuzione.connection'                          => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.connection')
 						],
 						'section_e_distribuzione.system_type'                         => [
-							'required',
 							'in' => config('general.system.sections.e_distribuzione.system_type')
 						],
 						'section_e_distribuzione.connections_note'                    => 'nullable',
@@ -269,7 +294,99 @@
 					// E-Distribuzione
 					$e_distribuzione = $this->system->section_e_distribuzione()->updateOrCreate([
 						'system_id' => $this->system->id
-					], $validated['section_e_distribuzione']);
+					], [
+						'documents'                           => $this->section_e_distribuzione['documents'] ?: null,
+						'question'                            => $this->section_e_distribuzione['question'] ?: null,
+						'quotation'                           => $this->section_e_distribuzione['quotation'] ?: null,
+						'start_of_process'                    => $this->section_e_distribuzione['start_of_process'] ?: null,
+						'end_of_process'                      => $this->section_e_distribuzione['end_of_process'] ?: null,
+						'start_of_work'                       => $this->section_e_distribuzione['start_of_work'] ?: null,
+						'end_of_work'                         => $this->section_e_distribuzione['end_of_work'] ?: null,
+						'censimp'                             => $this->section_e_distribuzione['censimp'] ?: null,
+						'rde'                                 => $this->section_e_distribuzione['rde'] ?: null,
+						'measurement_card'                    => $this->section_e_distribuzione['measurement_card'] ?: null,
+						'activation'                          => $this->section_e_distribuzione['activation'] ?: null,
+						'gse'                                 => $this->section_e_distribuzione['gse'] ?: null,
+						'connection'                          => $this->section_e_distribuzione['connection'] ?: null,
+						'system_type'                         => $this->section_e_distribuzione['system_type'] ?: null,
+						'connections_note'                    => $this->section_e_distribuzione['connections_note'] ?: null,
+						'spi_execution_date'                  => $this->section_e_distribuzione['spi_execution_date'] ?: null,
+						'spi_expiration_date'                 => $this->section_e_distribuzione['spi_expiration_date'] ?: null,
+						'spg_execution_date'                  => $this->section_e_distribuzione['spg_execution_date'] ?: null,
+						'spg_expiration_date'                 => $this->section_e_distribuzione['spg_expiration_date'] ?: null,
+						'ground_verification_execution_date'  => $this->section_e_distribuzione['ground_verification_execution_date'] ?: null,
+						'ground_verification_expiration_date' => $this->section_e_distribuzione['ground_verification_expiration_date'] ?: null,
+						'adjustments_note'                    => $this->section_e_distribuzione['adjustments_note'] ?: null,
+					]);
+				case 'gse':
+					$validated = $this->validate([
+						'section_gse.fuel_mix'          => [
+							'in' => config('general.system.sections.gse.fuel_mix')
+						],
+						'section_gse.antimafia'         => [
+							'in' => config('general.system.sections.gse.antimafia')
+						],
+						'section_gse.invoice_january'   => [
+							'in' => config('general.system.sections.gse.invoice_january')
+						],
+						'section_gse.invoice_february'  => [
+							'in' => config('general.system.sections.gse.invoice_february')
+						],
+						'section_gse.invoice_march'     => [
+							'in' => config('general.system.sections.gse.invoice_march')
+						],
+						'section_gse.invoice_april'     => [
+							'in' => config('general.system.sections.gse.invoice_april')
+						],
+						'section_gse.invoice_may'       => [
+							'in' => config('general.system.sections.gse.invoice_may')
+						],
+						'section_gse.invoice_june'      => [
+							'in' => config('general.system.sections.gse.invoice_june')
+						],
+						'section_gse.invoice_july'      => [
+							'in' => config('general.system.sections.gse.invoice_july')
+						],
+						'section_gse.invoice_august'    => [
+							'in' => config('general.system.sections.gse.invoice_august')
+						],
+						'section_gse.invoice_september' => [
+							'in' => config('general.system.sections.gse.invoice_september')
+						],
+						'section_gse.invoice_october'   => [
+							'in' => config('general.system.sections.gse.invoice_october')
+						],
+						'section_gse.invoice_november'  => [
+							'in' => config('general.system.sections.gse.invoice_november')
+						],
+						'section_gse.invoice_december'  => [
+							'in' => config('general.system.sections.gse.invoice_december')
+						],
+						'section_gse.seu'               => [
+							'in' => config('general.system.sections.gse.seu')
+						],
+					]);
+					// GSE
+					$gse = $this->system->section_gse()->updateOrCreate([
+						'system_id' => $this->system->id
+					], [
+						'fuel_mix'          => $this->section_gse['fuel_mix'] ?: null,
+						'antimafia'         => $this->section_gse['antimafia'] ?: null,
+						'invoice_january'   => $this->section_gse['invoice_january'] ?: null,
+						'invoice_february'  => $this->section_gse['invoice_february'] ?: null,
+						'invoice_march'     => $this->section_gse['invoice_march'] ?: null,
+						'invoice_april'     => $this->section_gse['invoice_april'] ?: null,
+						'invoice_may'       => $this->section_gse['invoice_may'] ?: null,
+						'invoice_june'      => $this->section_gse['invoice_june'] ?: null,
+						'invoice_july'      => $this->section_gse['invoice_july'] ?: null,
+						'invoice_august'    => $this->section_gse['invoice_august'] ?: null,
+						'invoice_september' => $this->section_gse['invoice_september'] ?: null,
+						'invoice_october'   => $this->section_gse['invoice_october'] ?: null,
+						'invoice_november'  => $this->section_gse['invoice_november'] ?: null,
+						'invoice_december'  => $this->section_gse['invoice_december'] ?: null,
+						'seu'               => $this->section_gse['seu'] ?: null,
+					]);
+					break;
 			}
 		}
 
