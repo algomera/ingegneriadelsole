@@ -46,4 +46,9 @@
 			\App\Http\Livewire\Groups\Index::class,
 			'__invoke'
 		])->name('groups');
+		//// Users
+		Route::get('/users', [
+			\App\Http\Livewire\Users\Index::class,
+			'__invoke'
+		])->name('users');
 	});
