@@ -41,4 +41,9 @@
 			\App\Http\Livewire\Systems\Show::class,
 			'__invoke'
 		])->name('customers.systems.show');
+		//// Groups
+		Route::get('/groups', [
+			\App\Http\Livewire\Groups\Index::class,
+			'__invoke'
+		])->name('groups');
 	});

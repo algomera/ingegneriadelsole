@@ -23,7 +23,7 @@
 								<x-jet-label for="group_id">
 									Gruppo di appartenenza
 								</x-jet-label>
-								<span wire:click="$emit('openModal', 'customers.create-group')" class="text-xs text-indigo-500 cursor-pointer">Crea</span>
+								<span wire:click="$emit('openModal', 'groups.create')" class="text-xs text-indigo-500 cursor-pointer">Crea</span>
 							</div>
 							<x-select wire:model.defer="group_id" for="group_id" class="mt-1">
 								<option value="null" selected>Nessuno</option>

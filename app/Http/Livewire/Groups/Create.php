@@ -1,11 +1,11 @@
 <?php
 
-	namespace App\Http\Livewire\Customers;
+	namespace App\Http\Livewire\Groups;
 
 	use App\Models\Group;
 	use LivewireUI\Modal\ModalComponent;
 
-	class CreateGroup extends ModalComponent
+	class Create extends ModalComponent
 	{
 		public $name;
 
@@ -17,11 +17,11 @@
 				'title' => 'Gruppo creato',
 				'type'  => 'success',
 			]);
-			$this->emitTo('general-informations-step', 'group-created', $group->id);
+			$this->emit('group-created', $group->id);
 			$this->closeModal();
 		}
 
 		public function render() {
-			return view('livewire.customers.create-group');
+			return view('livewire.groups.create');
 		}
 	}
