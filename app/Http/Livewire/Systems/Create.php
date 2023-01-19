@@ -53,7 +53,7 @@
 		public $terna = false;
 		public $g_stat = false;
 		public $e_distribuzione = false;
-		public $new_concessions = false;
+		public $new_connections = false;
 		public $adjustments = false;
 		public $reconciliation = false;
 		public $maintenance = false;
@@ -213,7 +213,7 @@
 				'terna'                  => $this->terna,
 				'g_stat'                 => $this->g_stat,
 				'e_distribuzione'        => $this->e_distribuzione,
-				'new_concessions'        => $this->new_concessions,
+				'new_connections'        => $this->new_connections,
 				'adjustments'            => $this->adjustments,
 				'reconciliation'         => $this->reconciliation,
 				'maintenance'            => $this->maintenance,

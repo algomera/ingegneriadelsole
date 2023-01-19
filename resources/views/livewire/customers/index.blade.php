@@ -12,7 +12,7 @@
 			@forelse($customers as $customer)
 				<li class="flex items-start justify-between py-4">
 					<div>
-						<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $customer->name }}</p>
+						<a href="{{ route('customers.show', $customer->id) }}" class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $customer->name }}</a>
 					</div>
 					<div class="flex items-center space-x-8">
 						<a href="{{ route('customers.show', $customer->id) }}">
