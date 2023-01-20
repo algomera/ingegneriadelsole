@@ -30,7 +30,7 @@
 					@case('general_informations')
 						<div wire:key="general_informations">
 							<div class="border-t border-gray-200 py-5">
-								<dl class="grid grid-cols-1 gap-7 sm:grid-cols-2">
+								<dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 									<div class="sm:col-span-1">
 										<dt class="text-sm font-medium text-gray-500">Denominazione</dt>
 										<dd class="mt-1 text-sm text-gray-900">{{ $customer->name ?: '-' }}</dd>
@@ -200,12 +200,142 @@
 			<x-slot:title>Impianti</x-slot:title>
 		</x-card-header>
 		<div class="p-4">
-			<ul role="list" class="divide-y divide-gray-200">
+			<ul x-data="{open: 0}" role="list" class="divide-y divide-gray-200">
 				@forelse($customer->systems as $system)
-					<li class="flex items-start justify-between py-4">
-						<div>
-							<a href="{{ route('customers.systems.show', [$customer->id, $system->id]) }}"
-							   class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
+					<li wire:key="{{$system->id}}" class="pt-4">
+						<div x-on:click="open = open === 0 ? {{ $system->id }} : 0"
+						     class="group mb-2.5 flex items-center justify-between cursor-pointer">
+							<div>
+								<p :class="open === {{ $system->id }} ? 'text-indigo-600' : 'text-gray-900'"
+								   class="text-sm font-medium group-hover:text-indigo-600 cursor-pointer">
+									{{ $system->name }}
+								</p>
+							</div>
+							<template x-if="open === {{ $system->id }}">
+								<x-heroicon-o-chevron-up
+										class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-chevron-up>
+							</template>
+							<template x-if="open !== {{ $system->id }}">
+								<x-heroicon-o-chevron-down
+										class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-chevron-down>
+							</template>
+
+						</div>
+						<div x-show="open === {{ $system->id }}">
+							<div class="border-t border-gray-200 py-5">
+								<dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Potenza</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->power }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Censimp</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->censimp }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">POD</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->pod }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Connessione</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ config('general.system.connections.'.$system->connection) }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Tensione</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->tension }}</dd>
+									</div>
+									<div class="sm:col-span-2">
+										<dt class="text-sm font-medium text-gray-500">Via</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->street }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Città</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->city }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Provincia</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->province }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Data allaccio</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->connection_date }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Incentivo</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ config('general.system.incentives.'.$system->incentive) }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Vendita</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ config('general.system.sales.'.$system->sale) }}</dd>
+									</div>
+									<div class="sm:col-span-1">
+										<dt class="text-sm font-medium text-gray-500">Codice Ditta</dt>
+										<dd class="mt-1 text-sm text-gray-900">{{ $system->company_code }}</dd>
+									</div>
+									<div class="sm:col-span-2 mt-5 space-y-5">
+										<div>
+											<h3 class="text-sm font-bold text-gray-800">Misure (M1)</h3>
+											@if($system->m_one)
+												<dd class="mt-1 text-sm text-gray-900">
+													<dl class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-2 border-2">
+														<div class="sm:col-span-1">
+															<dt class="text-sm font-medium text-gray-500">Marca</dt>
+															<dd class="mt-1 text-sm text-gray-900">{{ $system->m_one->brand }}</dd>
+														</div>
+														<div class="sm:col-span-1">
+															<dt class="text-sm font-medium text-gray-500">Matricola</dt>
+															<dd class="mt-1 text-sm text-gray-900">{{ $system->m_one->number }}</dd>
+														</div>
+														<div class="sm:col-span-1">
+															<dt class="text-sm font-medium text-gray-500">K</dt>
+															<dd class="mt-1 text-sm text-gray-900">{{ $system->m_one->k }}</dd>
+														</div>
+														<div class="sm:col-span-1">
+															<dt class="text-sm font-medium text-gray-500">Telefono</dt>
+															<dd class="mt-1 text-sm text-gray-900">{{ $system->m_one->phone }}</dd>
+														</div>
+													</dl>
+												</dd>
+											@else
+												<p class="py-1 text-sm text-gray-500">Nessun M1 inserito</p>
+											@endif
+										</div>
+										<div>
+											<h3 class="text-sm font-bold text-gray-800">Misure (M2)</h3>
+											@if($system->m_twos->count() > 0)
+												<dd class="mt-1 text-sm text-gray-900 space-y-3">
+													@foreach($system->m_twos as $k => $m_two)
+														<dl wire:key="m_two-{{ $k }}"
+														    class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-2 border-2">
+															<div class="sm:col-span-1">
+																<dt class="text-sm font-medium text-gray-500">Marca</dt>
+																<dd class="mt-1 text-sm text-gray-900">{{ $m_two->brand }}</dd>
+															</div>
+															<div class="sm:col-span-1">
+																<dt class="text-sm font-medium text-gray-500">
+																	Matricola
+																</dt>
+																<dd class="mt-1 text-sm text-gray-900">{{ $m_two->number }}</dd>
+															</div>
+															<div class="sm:col-span-1">
+																<dt class="text-sm font-medium text-gray-500">K</dt>
+																<dd class="mt-1 text-sm text-gray-900">{{ $m_two->k }}</dd>
+															</div>
+															<div class="sm:col-span-1">
+																<dt class="text-sm font-medium text-gray-500">Telefono
+																</dt>
+																<dd class="mt-1 text-sm text-gray-900">{{ $m_two->phone }}</dd>
+															</div>
+														</dl>
+													@endforeach
+												</dd>
+											@else
+												<p class="py-1 text-sm text-gray-500">Nessun M2 inserito</p>
+											@endif
+										</div>
+									</div>
+								</dl>
+							</div>
 						</div>
 					</li>
 				@empty

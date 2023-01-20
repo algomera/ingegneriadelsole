@@ -75,7 +75,7 @@
 									</div>
 								</div>
 							@endif
-							@if($system->m_twos)
+							@if($system->m_twos->count() > 0)
 								<div wire:key="adm_m_twos">
 									<h3 class="text-sm font-bold">Misure (M2)</h3>
 									<div class="divide-y">
