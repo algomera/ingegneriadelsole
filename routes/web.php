@@ -36,6 +36,10 @@
 			\App\Http\Livewire\Customers\Show::class,
 			'__invoke'
 		])->name('customers.show');
+		Route::get('/customers/{customer}/edit', [
+			\App\Http\Livewire\Customers\Edit::class,
+			'__invoke'
+		])->name('customers.edit');
 		//// Systems
 		Route::get('/customers/{customer}/systems/{system}', [
 			\App\Http\Livewire\Systems\Show::class,

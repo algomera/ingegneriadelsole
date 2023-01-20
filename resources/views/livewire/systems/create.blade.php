@@ -4,7 +4,7 @@
 	</x-card-header>
 	<div class="p-4 space-y-6">
 		<nav aria-label="Progress">
-			<ol role="list" class="space-y-4 flex justify-around space-y-0 md:space-x-8">
+			<ol role="list" class="flex justify-around space-y-0 md:space-x-8">
 				@foreach($steps as $k => $step)
 					<li class="md:flex-1">
 						<!-- Completed Step -->

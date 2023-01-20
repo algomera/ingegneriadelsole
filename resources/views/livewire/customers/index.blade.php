@@ -2,9 +2,11 @@
 	<x-card-header>
 		<x-slot:title>Anagrafiche</x-slot:title>
 		<x-slot:actions>
-			<x-jet-button :href="route('customers.create')">
-				<x-heroicon-o-plus class="w-4 h-4"></x-heroicon-o-plus>
-			</x-jet-button>
+			@can('customer_create')
+				<x-jet-button :href="route('customers.create')">
+					<x-heroicon-o-plus class="w-4 h-4"></x-heroicon-o-plus>
+				</x-jet-button>
+			@endcan
 		</x-slot:actions>
 	</x-card-header>
 	<div class="p-4">
@@ -12,12 +14,16 @@
 			@forelse($customers as $customer)
 				<li class="flex items-start justify-between py-4">
 					<div>
-						<a href="{{ route('customers.show', $customer->id) }}" class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $customer->name }}</a>
+						<a href="{{ route('customers.show', $customer->id) }}"
+						   class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $customer->name }}</a>
 					</div>
 					<div class="flex items-center space-x-8">
-						<a href="{{ route('customers.show', $customer->id) }}">
-							<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
-						</a>
+						@can('customer_update')
+							<a href="{{ route('customers.edit', $customer->id) }}">
+								<x-heroicon-o-pencil
+										class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+							</a>
+						@endcan
 					</div>
 				</li>
 			@empty
