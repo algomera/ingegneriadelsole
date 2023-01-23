@@ -6,10 +6,13 @@
 	use App\Models\Headquarter;
 	use App\Models\LegalRepresentative;
 	use App\Models\Referent;
+	use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	use Livewire\Component;
 
 	class Create extends Component
 	{
+		use AuthorizesRequests;
+
 		public $name = '';
 		public $group_id = null;
 		public $agent = 0;
@@ -60,6 +63,10 @@
 				'legal_representatives_province'   => 'required|string',
 				'note'                             => 'nullable'
 			];
+		}
+
+		public function mount() {
+			$this->authorize('customer_create');
 		}
 
 		public function submit() {

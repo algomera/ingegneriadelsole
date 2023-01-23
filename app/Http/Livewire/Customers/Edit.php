@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Livewire\Customers;
+	namespace App\Http\Livewire\Customers;
 
-use App\Models\Customer;
-use Livewire\Component;
+	use App\Models\Customer;
+	use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+	use Livewire\Component;
 
-class Edit extends Component
-{
-	public Customer $customer;
+	class Edit extends Component
+	{
+		use AuthorizesRequests;
 
-	protected $listeners = [
-		'system-added' => '$refresh',
-	];
+		public Customer $customer;
+		protected $listeners = [
+			'system-added' => '$refresh',
+		];
 
-	public function mount(Customer $customer) {
-		$this->customer = $customer;
+		public function mount(Customer $customer) {
+			$this->authorize('customer_update');
+			$this->customer = $customer;
+		}
+
+		public function render() {
+			return view('livewire.customers.edit');
+		}
 	}
-    public function render()
-    {
-        return view('livewire.customers.edit');
-    }
-}
