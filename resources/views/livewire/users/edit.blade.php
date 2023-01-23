@@ -24,7 +24,9 @@
 	</div>
 	<x-card-footer>
 		<x-slot:left_actions>
-			<x-jet-danger-button wire:click="delete">Elimina</x-jet-danger-button>
+			@can('user_delete')
+				<x-jet-danger-button wire:click="delete">Elimina</x-jet-danger-button>
+			@endcan
 		</x-slot:left_actions>
 		<x-slot:right_actions>
 			<x-jet-button wire:click="save">Salva</x-jet-button>

@@ -5,10 +5,12 @@
 	use App\Models\Customer;
 	use App\Models\Group;
 	use App\Models\System;
+	use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	use LivewireUI\Modal\ModalComponent;
 
 	class Edit extends ModalComponent
 	{
+		use AuthorizesRequests;
 		public $group;
 
 		protected function rules() {
@@ -22,10 +24,12 @@
 		}
 
 		public function mount(Group $group) {
+			$this->authorize('group_update');
 			$this->group = $group;
 		}
 
 		public function delete() {
+			$this->authorize('group_delete');
 			$customers = Customer::where('group_id', $this->group->id)->get();
 			foreach ($customers as $customer) {
 				$customer->update([

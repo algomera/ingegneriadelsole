@@ -32,7 +32,7 @@
 				'customer_create',
 				'customer_read',
 				'customer_update',
-				'customer_delete',
+				// 'customer_delete',
 				/// Steps
 				// Informazioni generali
 				'customer_general_informations_read',
@@ -58,14 +58,12 @@
 				'customer_notes_read',
 				'customer_notes_update',
 				//// Gruppi di appartenenza
-				///
 				'group_access',
 				'group_create',
 				'group_read',
 				'group_update',
 				'group_delete',
 				//// Utenti
-				///
 				'user_access',
 				'user_create',
 				'user_read',

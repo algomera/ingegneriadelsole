@@ -3,11 +3,18 @@
 	namespace App\Http\Livewire\Groups;
 
 	use App\Models\Group;
+	use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	use LivewireUI\Modal\ModalComponent;
 
 	class Create extends ModalComponent
 	{
+		use AuthorizesRequests;
+
 		public $name;
+
+		public function mount() {
+			$this->authorize('group_create');
+		}
 
 		public function save() {
 			$group = Group::create([
