@@ -17,12 +17,14 @@
 				<div>
 					<div class="flex items-center justify-between">
 						<h2 class="sm:hidden text-lg font-medium text-gray-900">Credenziali</h2>
-						@if($credentials->count())
-							<x-jet-button
-									wire:click="$emit('openModal', 'customers.create-credential', {{ json_encode(['customer_id' => $this->state()->forStep('general-informations-step')['customer_id']]) }})">
-								Aggiungi
-							</x-jet-button>
-						@endif
+						@can('credential_create')
+							@if($credentials->count())
+								<x-jet-button
+										wire:click="$emit('openModal', 'customers.create-credential', {{ json_encode(['customer_id' => $this->state()->forStep('general-informations-step')['customer_id']]) }})">
+									Aggiungi
+								</x-jet-button>
+							@endif
+						@endcan
 					</div>
 					<div class="mt-4">
 						<ul role="list" class="divide-y divide-gray-200">
@@ -34,23 +36,31 @@
 											<strong>{{ $credential->username }}</strong></p>
 										<div class="flex space-x-1 text-sm text-gray-500">
 											<span>Password:</span>
-											<div x-on:click="show = true" x-show="!show"
-											     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
-												<x-heroicon-o-eye class="w-3 h-3"></x-heroicon-o-eye>
-											</div>
-											<div x-on:click="show = false" x-show="show"
-											     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
-												<x-heroicon-o-eye-slash class="w-3 h-3"></x-heroicon-o-eye-slash>
-											</div>
-											<strong x-show="show">{{ $credential->password }}</strong>
+											@can('credential_read')
+												<div x-on:click="show = true" x-show="!show"
+												     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
+													<x-heroicon-o-eye class="w-3 h-3"></x-heroicon-o-eye>
+												</div>
+												<div x-on:click="show = false" x-show="show"
+												     class="flex items-center justify-center text-xs border border-gray-300 px-1 rounded">
+													<x-heroicon-o-eye-slash class="w-3 h-3"></x-heroicon-o-eye-slash>
+												</div>
+												<strong x-show="show">{{ $credential->password }}</strong>
+											@else
+												<span>-</span>
+											@endcan
 										</div>
 									</div>
 									<div class="flex items-center space-x-4">
-										<x-heroicon-o-trash wire:click="deleteCredential({{ $credential->id }})"
-										                    class="w-4 h-4 text-red-500 cursor-pointer hover:text-red-700"></x-heroicon-o-trash>
-										<x-heroicon-o-pencil
-												wire:click="$emit('openModal', 'customers.edit-credential', {{ json_encode(['credential_id' => $credential->id]) }})"
-												class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+										@can('credential_delete')
+											<x-heroicon-o-trash wire:click="deleteCredential({{ $credential->id }})"
+											                    class="w-4 h-4 text-red-500 cursor-pointer hover:text-red-700"></x-heroicon-o-trash>
+										@endcan
+										@can('credential_update')
+											<x-heroicon-o-pencil
+													wire:click="$emit('openModal', 'customers.edit-credential', {{ json_encode(['credential_id' => $credential->id]) }})"
+													class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+										@endcan
 									</div>
 								</li>
 							@empty

@@ -16,7 +16,6 @@
 		];
 
 		public function mount(Customer $customer) {
-			$this->authorize('customer_update');
 			$this->customer = $customer;
 		}
 

@@ -4,35 +4,31 @@
 		@foreach($steps as $step)
 			<li>
 				<!-- Upcoming Step -->
-				<div @if ($step->isPrevious())
+				<div @if ($step->isPrevious() || !auth()->user()->can('customer_update'))
 					     wire:click="{{ $step->show() }}"
-				     @endif class="group">
+				     @endif class="group @if(!auth()->user()->can('customer_update')) cursor-pointer @endif">
 					<div class="flex items-start">
-						@if($step->isPrevious())
-							<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-								<x-heroicon-o-check-circle class="h-full w-full text-indigo-600 group-hover:text-indigo-800"></x-heroicon-o-check-circle>
-							</span>
-						@endif
-						@if($step->isNext())
+						@if($step->isPrevious() || $step->isNext())
 							<div class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
 							     aria-hidden="true">
-								<div class="h-2 w-2 rounded-full bg-gray-300 {{ $step->isPrevious() ? 'group-hover:bg-gray-400' : '' }}"></div>
+								<div class="h-2 w-2 rounded-full bg-gray-300 {{ $step->isPrevious() || !auth()->user()->can('customer_update') ? 'group-hover:bg-gray-400' : '' }}"></div>
 							</div>
 						@endif
 						@if($step->isCurrent())
 							@if($errors->any())
 								<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-									<x-heroicon-o-x-circle class="h-full w-full text-red-600 group-hover:text-red-800"></x-heroicon-o-x-circle>
+									<x-heroicon-o-x-circle
+											class="h-full w-full text-red-600 group-hover:text-red-800"></x-heroicon-o-x-circle>
 								</span>
 							@else
 								<span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
 								      aria-hidden="true">
-								<span class="absolute h-4 w-4 rounded-full bg-indigo-200"></span>
-								<span class="relative block h-2 w-2 rounded-full bg-indigo-600"></span>
-							</span>
+									<span class="absolute h-4 w-4 rounded-full bg-indigo-200"></span>
+									<span class="relative block h-2 w-2 rounded-full bg-indigo-600"></span>
+								</span>
 							@endif
 						@endif
-						<p class="hidden sm:block ml-3 text-sm {{ $step->isCurrent() ? $errors->any() ? 'font-semibold text-red-500' : 'font-semibold text-indigo-500' : 'text-gray-500' }} {{ $step->isPrevious() ? 'group-hover:text-gray-900 cursor-pointer' : '' }}">{{ $step->label }}</p>
+						<p class="hidden sm:block ml-3 text-sm {{ $step->isCurrent() ? $errors->any() ? 'font-semibold text-red-500' : 'font-semibold text-indigo-500' : 'text-gray-500' }} {{ $step->isPrevious() || (!auth()->user()->can('customer_update') && !$step->isCurrent()) ? 'group-hover:text-gray-900 cursor-pointer' : '' }}">{{ $step->label }}</p>
 					</div>
 				</div>
 			</li>

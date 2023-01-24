@@ -4,12 +4,12 @@
 
 	use App\Models\Customer;
 	use App\Models\Group;
+	use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	use Spatie\LivewireWizard\Components\StepComponent;
 
 	class GeneralInformationsStep extends StepComponent
 	{
 		public $customer_id, $name, $group_id, $agent, $type;
-
 		protected $listeners = [
 			'group-created' => 'selectGroup'
 		];
@@ -25,13 +25,15 @@
 		}
 
 		public function next() {
-			$this->validate();
-			Customer::updateOrCreate(['id' => $this->customer_id], [
-				'name'     => $this->name,
-				'group_id' => $this->group_id === "null" ? null : $this->group_id,
-				'agent'    => $this->agent,
-				'type'     => $this->type,
-			])->id;
+			if (auth()->user()->can('customer_update')) {
+				$this->validate();
+				Customer::updateOrCreate(['id' => $this->customer_id], [
+					'name'     => $this->name,
+					'group_id' => $this->group_id === "null" ? null : $this->group_id,
+					'agent'    => $this->agent,
+					'type'     => $this->type,
+				])->id;
+			}
 			$this->nextStep();
 		}
 

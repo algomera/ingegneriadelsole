@@ -18,19 +18,19 @@
 				<h2 class="sm:hidden text-lg font-medium text-gray-900">Referente</h2>
 				<div class="mt-4 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-6">
 					<div class="sm:col-span-3">
-						<x-jet-input wire:model.defer="referent_first_name" type="text" for="referent_first_name"
+						<x-jet-input :disabled="!auth()->user()->can('customer_update')" wire:model.defer="referent_first_name" type="text" for="referent_first_name"
 						             label="Nome"></x-jet-input>
 					</div>
 					<div class="sm:col-span-3">
-						<x-jet-input wire:model.defer="referent_last_name" type="text" for="referent_last_name"
+						<x-jet-input :disabled="!auth()->user()->can('customer_update')" wire:model.defer="referent_last_name" type="text" for="referent_last_name"
 						             label="Cognome"></x-jet-input>
 					</div>
 					<div class="sm:col-span-3">
-						<x-jet-input wire:model.defer="referent_email" type="email" for="referent_email"
+						<x-jet-input :disabled="!auth()->user()->can('customer_update')" wire:model.defer="referent_email" type="email" for="referent_email"
 						             label="Email"></x-jet-input>
 					</div>
 					<div class="sm:col-span-3">
-						<x-jet-input wire:model.defer="referent_phone" type="tel" for="referent_phone"
+						<x-jet-input :disabled="!auth()->user()->can('customer_update')" wire:model.defer="referent_phone" type="tel" for="referent_phone"
 						             label="Telefono"></x-jet-input>
 					</div>
 				</div>

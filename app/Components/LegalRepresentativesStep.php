@@ -22,30 +22,31 @@
 		}
 
 		public function next() {
-			$this->validate();
-			if($this->customer->legal_representative) {
-				$this->customer->legal_representative->update([
-					'first_name'  => $this->legal_representative_first_name,
-					'last_name'   => $this->legal_representative_last_name,
-					'fiscal_code' => $this->legal_representative_fiscal_code,
-					'street'      => $this->legal_representative_street,
-					'city'        => $this->legal_representative_city,
-					'province'    => $this->legal_representative_province,
-				]);
-			} else {
-				$legal_representative = LegalRepresentative::create([
-					'first_name'  => $this->legal_representative_first_name,
-					'last_name'   => $this->legal_representative_last_name,
-					'fiscal_code' => $this->legal_representative_fiscal_code,
-					'street'      => $this->legal_representative_street,
-					'city'        => $this->legal_representative_city,
-					'province'    => $this->legal_representative_province,
-				]);
-				$this->customer->update([
-					'legal_representative_id' => $legal_representative->id
-				]);
+			if (auth()->user()->can('customer_update')) {
+				$this->validate();
+				if ($this->customer->legal_representative) {
+					$this->customer->legal_representative->update([
+						'first_name'  => $this->legal_representative_first_name,
+						'last_name'   => $this->legal_representative_last_name,
+						'fiscal_code' => $this->legal_representative_fiscal_code,
+						'street'      => $this->legal_representative_street,
+						'city'        => $this->legal_representative_city,
+						'province'    => $this->legal_representative_province,
+					]);
+				} else {
+					$legal_representative = LegalRepresentative::create([
+						'first_name'  => $this->legal_representative_first_name,
+						'last_name'   => $this->legal_representative_last_name,
+						'fiscal_code' => $this->legal_representative_fiscal_code,
+						'street'      => $this->legal_representative_street,
+						'city'        => $this->legal_representative_city,
+						'province'    => $this->legal_representative_province,
+					]);
+					$this->customer->update([
+						'legal_representative_id' => $legal_representative->id
+					]);
+				}
 			}
-
 			$this->nextStep();
 		}
 

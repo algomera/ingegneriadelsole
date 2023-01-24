@@ -20,13 +20,15 @@
 		}
 
 		public function next() {
-			$this->validate();
-			$this->customer->update([
-				'pec'                => $this->pec,
-				'notification_email' => $this->notification_email,
-				'vat_number'         => $this->vat_number,
-				'fiscal_code'        => $this->fiscal_code,
-			]);
+			if (auth()->user()->can('customer_update')) {
+				$this->validate();
+				$this->customer->update([
+					'pec'                => $this->pec,
+					'notification_email' => $this->notification_email,
+					'vat_number'         => $this->vat_number,
+					'fiscal_code'        => $this->fiscal_code,
+				]);
+			}
 			$this->nextStep();
 		}
 
