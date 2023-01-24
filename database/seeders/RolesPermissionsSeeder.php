@@ -34,29 +34,26 @@
 				'customer_update',
 				// 'customer_delete',
 				/// Steps
-				// Informazioni generali
-				'customer_general_informations_read',
-				'customer_general_informations_update',
-				// Informazioni di contatto
-				'customer_contact_informations_read',
-				'customer_contact_informations_update',
-				// Referente
-				'customer_referent_read',
-				'customer_referent_update',
-				// Sede Legale
-				'customer_headquarter_read',
-				'customer_headquarter_update',
-				// Rappresentante Legale
-				'customer_legal_representative_read',
-				'customer_legal_representative_update',
 				// Credenziali
 				'customer_credentials_create',
 				'customer_credentials_read',
 				'customer_credentials_update',
 				'customer_credentials_delete',
-				// Notes
-				'customer_notes_read',
-				'customer_notes_update',
+				/// Impianti
+				'system_create',
+//				'system_read',
+				'system_update',
+				'system_delete',
+				// M1
+				'mone_create',
+//				'mone_read',
+				'mone_update',
+				'mone_delete',
+				// M2
+				'mtwo_create',
+//				'mtwo_read',
+				'mtwo_update',
+				'mtwo_delete',
 				//// Gruppi di appartenenza
 				'group_access',
 				'group_create',

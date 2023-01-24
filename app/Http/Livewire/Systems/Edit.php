@@ -104,8 +104,7 @@
 			];
 		}
 
-		public static function closeModalOnClickAway(): bool
-		{
+		public static function closeModalOnClickAway(): bool {
 			return false;
 		}
 
@@ -167,30 +166,32 @@
 		}
 
 		public function updateSection($s) {
-			if($this->system->$s === false) {
-				foreach (config('general.system.sections.'.$s.'.children') as $k => $child) {
+			if ($this->system->$s === false) {
+				foreach (config('general.system.sections.' . $s . '.children') as $k => $child) {
 					$this->system->$k = false;
 				}
 			}
 		}
 
 		public function save() {
-			$this->validate();
-			$this->system->update($this->validate()['system']);
-			if ($this->m_ones) {
-				$this->system->m_one()->updateOrCreate(['number' => $this->m_ones[0]['number']], $this->m_ones[0]);
-			}
-			if ($this->m_twos) {
-				foreach ($this->m_twos as $m_two) {
-					$this->system->m_twos()->updateOrCreate(['number' => $m_two['number']], $m_two);
+			if (auth()->user()->can('system_update')) {
+				$this->validate();
+				$this->system->update($this->validate()['system']);
+				if ($this->m_ones) {
+					$this->system->m_one()->updateOrCreate(['number' => $this->m_ones[0]['number']], $this->m_ones[0]);
 				}
+				if ($this->m_twos) {
+					foreach ($this->m_twos as $m_two) {
+						$this->system->m_twos()->updateOrCreate(['number' => $m_two['number']], $m_two);
+					}
+				}
+				$this->emit('system-added');
+				$this->dispatchBrowserEvent('open-notification', [
+					'title' => 'Impianto aggiunto',
+					'type'  => 'success',
+				]);
+				$this->closeModal();
 			}
-			$this->emit('system-added');
-			$this->dispatchBrowserEvent('open-notification', [
-				'title' => 'Impianto aggiunto',
-				'type'  => 'success',
-			]);
-			$this->closeModal();
 		}
 
 		public function render() {

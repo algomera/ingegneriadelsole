@@ -8,13 +8,14 @@
 				@foreach($steps as $k => $step)
 					<li class="md:flex-1">
 						<!-- Completed Step -->
-						<div @class([
+						<div @cannot('system_update') wire:click="$set('currentStep', {{ $k }})" @endcannot @class([
         						'flex flex-col border-t-4 border-indigo-600 py-2 px-2 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep === $k,
-        						'group flex flex-col border-t-4 border-indigo-600 py-2 px-2 hover:border-indigo-800 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep >= $k,
-        						'group flex flex-col border-t-4 border-gray-200 py-2 px-2 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep <= $k,
+        						'group flex flex-col border-t-4 border-indigo-600 py-2 px-2 hover:border-indigo-600 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep >= $k,
+        						'group flex flex-col border-t-4 border-gray-200 py-2 px-2 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0' => $currentStep <= $k,
+        						'cursor-pointer hover:border-gray-300' => !auth()->user()->can('system_update')
         					])>
-							<span class="text-sm font-medium text-indigo-600 group-hover:text-indigo-800">{{ $step['label'] }}</span>
-							<span class="hidden text-sm font-medium md:block">{{ $step['description'] }}</span>
+							<span class="text-sm font-medium {{ $currentStep >= $k ? 'text-indigo-600' : 'text-gray-500' }}">{{ $step['label'] }}</span>
+{{--							<span class="hidden text-sm font-medium md:block">{{ $step['description'] }}</span>--}}
 						</div>
 					</li>
 				@endforeach
@@ -24,64 +25,82 @@
 		@if($currentStep === 1)
 			<div class="grid grid-cols-3 gap-6">
 				<div class="col-span-3">
-					<x-jet-input wire:model.defer="system.name" type="text" for="name" label="Nome impianto"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.name"
+					             type="text" for="name"
+					             label="Nome impianto"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.power" type="text" for="power" label="Potenza"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.power"
+					             type="text" for="power" label="Potenza"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.censimp" type="text" for="censimp" label="Censimp"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.censimp"
+					             type="text" for="censimp"
+					             label="Censimp"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.pod" type="text" for="pod" label="POD"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.pod"
+					             type="text" for="pod" label="POD"></x-jet-input>
 				</div>
 				<div class="col-span-3">
-					<x-select wire:model="connection" for="connection" label="Connessione">
+					<x-select :disabled="!auth()->user()->can('system_update')" wire:model="connection" for="connection"
+					          label="Connessione">
 						@foreach(config('general.system.connections') as $k => $connection)
 							<option value="{{$k}}">{{ $connection }}</option>
 						@endforeach
 					</x-select>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.tension" type="text" for="tension" label="Tensione"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.tension"
+					             type="text" for="tension"
+					             label="Tensione"></x-jet-input>
 				</div>
 			</div>
 		@endif
 		@if($currentStep === 2)
 			<div class="grid grid-cols-2 gap-6">
 				<div class="col-span-2">
-					<x-jet-input wire:model.defer="system.street" type="text" for="street" label="Indirizzo"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.street"
+					             type="text" for="street"
+					             label="Indirizzo"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.city" type="text" for="city" label="Città"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.city"
+					             type="text" for="city" label="Città"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-jet-input wire:model.defer="system.province" type="text" for="province" label="Provincia"></x-jet-input>
+					<x-jet-input :disabled="!auth()->user()->can('system_update')" wire:model.defer="system.province"
+					             type="text" for="province"
+					             label="Provincia"></x-jet-input>
 				</div>
 			</div>
 		@endif
 		@if($currentStep === 3)
 			<div class="grid grid-cols-2 gap-6">
 				<div class="col-span-2">
-					<x-jet-input wire:model.defer="system.connection_date" type="date" for="connection_date"
+					<x-jet-input :disabled="!auth()->user()->can('system_update')"
+					             wire:model.defer="system.connection_date" type="date" for="connection_date"
 					             label="Data allaccio"></x-jet-input>
 				</div>
 				<div class="col-span-1">
-					<x-select wire:model="incentive" for="incentive" label="Incentivo">
+					<x-select :disabled="!auth()->user()->can('system_update')" wire:model="incentive" for="incentive"
+					          label="Incentivo">
 						@foreach(config('general.system.incentives') as $k => $incentive)
 							<option value="{{$k}}">{{ $incentive }}</option>
 						@endforeach
 					</x-select>
 				</div>
 				<div class="col-span-1">
-					<x-select wire:model="sale" for="sale" label="Vendita">
+					<x-select :disabled="!auth()->user()->can('system_update')" wire:model="sale" for="sale"
+					          label="Vendita">
 						@foreach(config('general.system.sales') as $k => $sale)
 							<option value="{{$k}}">{{ $sale }}</option>
 						@endforeach
 					</x-select>
 				</div>
 				<div class="col-span-2">
-					<x-jet-input wire:model.defer="system.company_code" type="text" for="company_code"
+					<x-jet-input :disabled="!auth()->user()->can('system_update')"
+					             wire:model.defer="system.company_code" type="text" for="company_code"
 					             label="Codice Ditta"></x-jet-input>
 				</div>
 			</div>
@@ -94,12 +113,14 @@
 						<p class="mt-2 max-w-4xl text-sm text-gray-500">Puoi aggiungere soltanto un M1</p>
 						<x-jet-input-error for="m_ones"></x-jet-input-error>
 					</div>
-					@if(!$system->fresh()->m_one || $system->fresh()->m_one->count() < 1)
-						<x-jet-button
-								wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '1'])}})">
-							Aggiungi
-						</x-jet-button>
-					@endif
+					@can('mone_create')
+						@if(!$system->fresh()->m_one || $system->fresh()->m_one->count() < 1)
+							<x-jet-button
+									wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '1'])}})">
+								Aggiungi
+							</x-jet-button>
+						@endif
+					@endcan
 				</div>
 				<div>
 					<ul role="list" class="divide-y divide-gray-200">
@@ -116,11 +137,14 @@
 										<span>{{ $system->fresh()->m_one->phone }}</span>
 									</div>
 								</div>
-								<div class="flex items-center space-x-8">
-									<div wire:click="$emit('openModal', 'systems.edit-mone', {{ json_encode(['m_one' => $system->fresh()->m_one->id]) }})">
-										<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+								@can('mone_update')
+									<div class="flex items-center space-x-8">
+										<div wire:click="$emit('openModal', 'systems.edit-mone', {{ json_encode(['m_one' => $system->fresh()->m_one->id]) }})">
+											<x-heroicon-o-pencil
+													class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+										</div>
 									</div>
-								</div>
+								@endcan
 							</li>
 						@endif
 					</ul>
@@ -133,14 +157,16 @@
 						<h3 class="text-lg font-medium leading-3 text-gray-900">M2</h3>
 						<p class="mt-2 max-w-4xl text-sm text-gray-500">Puoi aggiungere più M2</p>
 					</div>
-					<x-jet-button
-							wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '2'])}})">
-						Aggiungi
-					</x-jet-button>
+					@can('mtwo_create')
+						<x-jet-button
+								wire:click="$emit('openModal', 'customers.create-m', {{json_encode(['type' => '2'])}})">
+							Aggiungi
+						</x-jet-button>
+					@endcan
 				</div>
 				<div>
 					<ul role="list" class="divide-y divide-gray-200">
-					@foreach($system->fresh()->m_twos as $m_two)
+						@foreach($system->fresh()->m_twos as $m_two)
 							<li wire:key="{{ $m_two->number }}"
 							    class="flex items-start justify-between py-4">
 								<div>
@@ -153,13 +179,16 @@
 										<span>{{ $m_two->phone }}</span>
 									</div>
 								</div>
-								<div class="flex items-center space-x-8">
-									<div wire:click="$emit('openModal', 'systems.edit-mtwo', {{ json_encode(['m_two' => $m_two->id]) }})">
-										<x-heroicon-o-pencil class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+								@can('mtwo_update')
+									<div class="flex items-center space-x-8">
+										<div wire:click="$emit('openModal', 'systems.edit-mtwo', {{ json_encode(['m_two' => $m_two->id]) }})">
+											<x-heroicon-o-pencil
+													class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+										</div>
 									</div>
-								</div>
+								@endcan
 							</li>
-					@endforeach
+						@endforeach
 					</ul>
 				</div>
 			</div>
@@ -170,7 +199,9 @@
 					<li class="py-4">
 						<div class="relative flex items-start">
 							<div class="flex h-5 items-center">
-								<x-jet-input wire:model="system.{{$k}}" wire:click="updateSection('{{ $k }}')" type="checkbox" id="{{ $k }}"
+								<x-jet-input :disabled="!auth()->user()->can('system_update')"
+								             wire:model="system.{{$k}}" wire:click="updateSection('{{ $k }}')"
+								             type="checkbox" id="{{ $k }}"
 								             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"></x-jet-input>
 							</div>
 							<div class="ml-3 text-sm">
@@ -185,7 +216,9 @@
 										<li class="py-4">
 											<div class="relative flex items-start">
 												<div class="flex h-5 items-center">
-													<x-jet-input wire:model="system.{{$kk}}" type="checkbox" id="{{ $kk }}"
+													<x-jet-input :disabled="!auth()->user()->can('system_update')"
+													             wire:model="system.{{$kk}}" type="checkbox"
+													             id="{{ $kk }}"
 													             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"></x-jet-input>
 												</div>
 												<div class="ml-3 text-sm">
@@ -220,7 +253,11 @@
 					</x-jet-button>
 				@endif
 				@if($currentStep === count($steps))
-					<x-jet-button wire:click="save">Salva</x-jet-button>
+					@can('system_update')
+						<x-jet-button wire:click="save">Salva</x-jet-button>
+					@else
+						<x-jet-button wire:click="$emit('closeModal')">Chiudi</x-jet-button>
+					@endcan
 				@endif
 			</div>
 		</x-slot:right_actions>

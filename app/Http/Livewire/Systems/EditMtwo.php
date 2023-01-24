@@ -20,15 +20,19 @@
 		}
 
 		public function delete() {
-			$this->m_two->delete();
-			$this->emit('m-deleted');
+			if (auth()->user()->can('mtwo_delete')) {
+				$this->m_two->delete();
+				$this->emit('m-deleted');
+			}
 			$this->closeModal();
 		}
 
 		public function save() {
-			$validated = $this->validate();
-			$this->m_two->update($validated['m_two']);
-			$this->emit('m-updated');
+			if (auth()->user()->can('mtwo_update')) {
+				$validated = $this->validate();
+				$this->m_two->update($validated['m_two']);
+				$this->emit('m-updated');
+			}
 			$this->closeModal();
 		}
 

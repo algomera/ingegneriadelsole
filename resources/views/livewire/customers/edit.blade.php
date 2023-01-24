@@ -4,10 +4,12 @@
 		<x-card-header>
 			<x-slot:title>Impianti</x-slot:title>
 			<x-slot:actions>
-				<x-jet-button
-						wire:click="$emit('openModal', 'systems.create', {{ json_encode(['customer_id' => $customer->id]) }})">
-					Crea
-				</x-jet-button>
+				@can('system_create')
+					<x-jet-button
+							wire:click="$emit('openModal', 'systems.create', {{ json_encode(['customer_id' => $customer->id]) }})">
+						Crea
+					</x-jet-button>
+				@endcan
 			</x-slot:actions>
 		</x-card-header>
 		<div class="p-4">
@@ -15,13 +17,23 @@
 				@forelse($customer->systems as $system)
 					<li class="flex items-start justify-between py-4">
 						<div>
-							<a href="{{ route('customers.systems.show', [$customer->id, $system->id]) }}"
-							   class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
+							@can('system_edit')
+								<a href="{{ route('customers.systems.show', [$customer->id, $system->id]) }}"
+								   class="mb-2.5 text-sm font-medium text-indigo-600 cursor-pointer hover:underline">{{ $system->name }}</a>
+							@else
+								<span
+										class="mb-2.5 text-sm font-medium text-gray-800">{{ $system->name }}</span>
+							@endcan
 						</div>
 						<div class="flex items-center space-x-8">
 							<div wire:click="$emit('openModal', 'systems.edit', {{ json_encode(['system' => $system->id]) }})">
-								<x-heroicon-o-pencil
-										class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+								@can('system_update')
+									<x-heroicon-o-pencil
+											class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-pencil>
+								@else
+									<x-heroicon-o-eye
+											class="w-4 h-4 text-gray-500 cursor-pointer hover:text-gray-700"></x-heroicon-o-eye>
+								@endcan
 							</div>
 						</div>
 					</li>
