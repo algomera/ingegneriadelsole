@@ -104,6 +104,11 @@
 			];
 		}
 
+		public static function closeModalOnClickAway(): bool
+		{
+			return false;
+		}
+
 		public static function modalMaxWidth(): string {
 			return '5xl';
 		}

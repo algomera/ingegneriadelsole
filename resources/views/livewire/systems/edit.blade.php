@@ -107,7 +107,14 @@
 							<li wire:key="{{ $system->fresh()->m_one->number }}"
 							    class="flex items-start justify-between py-4">
 								<div>
-									<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $system->fresh()->m_one->number }}</p>
+									<p class="mb-1.5 font-medium text-gray-900">{{ $system->fresh()->m_one->number }}</p>
+									<div class="flex space-x-2 text-sm text-gray-500">
+										<span>{{ $system->fresh()->m_one->brand }}</span>
+										<span>&middot;</span>
+										<span>{{ $system->fresh()->m_one->k }}</span>
+										<span>&middot;</span>
+										<span>{{ $system->fresh()->m_one->phone }}</span>
+									</div>
 								</div>
 								<div class="flex items-center space-x-8">
 									<div wire:click="$emit('openModal', 'systems.edit-mone', {{ json_encode(['m_one' => $system->fresh()->m_one->id]) }})">
@@ -137,7 +144,14 @@
 							<li wire:key="{{ $m_two->number }}"
 							    class="flex items-start justify-between py-4">
 								<div>
-									<p class="mb-2.5 text-sm font-medium text-gray-900">{{ $m_two->number }}</p>
+									<p class="mb-1.5 font-medium text-gray-900">{{ $m_two->number }}</p>
+									<div class="flex space-x-2 text-sm text-gray-500">
+										<span>{{ $m_two->brand }}</span>
+										<span>&middot;</span>
+										<span>{{ $m_two->k }}</span>
+										<span>&middot;</span>
+										<span>{{ $m_two->phone }}</span>
+									</div>
 								</div>
 								<div class="flex items-center space-x-8">
 									<div wire:click="$emit('openModal', 'systems.edit-mtwo', {{ json_encode(['m_two' => $m_two->id]) }})">
@@ -190,6 +204,9 @@
 		@endif
 	</div>
 	<x-card-footer>
+		<x-slot:left_actions>
+			<x-jet-secondary-button wire:click="$emit('closeModal')">Annulla</x-jet-secondary-button>
+		</x-slot:left_actions>
 		<x-slot:right_actions>
 			<div class="flex items-center space-x-3">
 				@if($currentStep > 1)

@@ -1,7 +1,10 @@
 <x-card>
 	<x-card-header>
 		<x-slot:title>
-			<h3>Modifica M1</h3>
+			<div class="flex items-center space-x-6">
+				<x-heroicon-o-chevron-left x-on:click="Livewire.emit('closeModal')" class="text-gray-600 w-4 h-4 cursor-pointer hover:text-gray-900"></x-heroicon-o-chevron-left>
+				<h3>Modifica M1</h3>
+			</div>
 		</x-slot:title>
 	</x-card-header>
 	<div class="p-4 grid grid-cols-2 gap-4">

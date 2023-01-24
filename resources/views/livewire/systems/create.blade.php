@@ -190,6 +190,9 @@
 		@endif
 	</div>
 	<x-card-footer>
+		<x-slot:left_actions>
+			<x-jet-secondary-button wire:click="$emit('closeModal')">Annulla</x-jet-secondary-button>
+		</x-slot:left_actions>
 		<x-slot:right_actions>
 			<div class="flex items-center space-x-3">
 				@if($currentStep > 1)
