@@ -216,22 +216,26 @@
 					$adm = $this->system->section_adm()->updateOrCreate([
 						'system_id' => $this->system->id
 					], [
-						'declaration'                  => $this->section_adm->declaration ?: null,
-						'register'                     => $this->section_adm->register ?: null,
-						'verification_execution_date'  => $this->section_adm->verification_execution_date ?: null,
-						'verification_expiration_date' => $this->section_adm->verification_expiration_date ?: null,
-						'note'                         => $this->section_adm->note ?: null
+						'declaration'                  => $this->section_adm['declaration'] ?: null,
+						'register'                     => $this->section_adm['register'] ?: null,
+						'verification_execution_date'  => $this->section_adm['verification_execution_date'] ?: null,
+						'verification_expiration_date' => $this->section_adm['verification_expiration_date'] ?: null,
+						'note'                         => $this->section_adm['note'] ?: null
 					]);
 					// M1
-					$m1 = $this->system->m_one()->updateOrCreate([
-						'system_id' => $this->system->id
-					], $validated['system']['m_one']);
-					// M2
-					foreach ($this->system->m_twos as $k => $m_two) {
-						$this->system->m_twos()->updateOrCreate([
-							'id'        => $m_two->id,
+					if ($this->system->m_one) {
+						$m1 = $this->system->m_one()->updateOrCreate([
 							'system_id' => $this->system->id
-						], $m_two->toArray());
+						], $validated['system']['m_one']);
+					}
+					// M2
+					if ($this->system->m_twos) {
+						foreach ($this->system->m_twos as $k => $m_two) {
+							$this->system->m_twos()->updateOrCreate([
+								'id'        => $m_two->id,
+								'system_id' => $this->system->id
+							], $m_two->toArray());
+						}
 					}
 					break;
 				case 'arera':
